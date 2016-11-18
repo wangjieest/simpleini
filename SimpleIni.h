@@ -1,195 +1,195 @@
 /** @mainpage
 
-<table>
-<tr><th>Library     <td>SimpleIni
-<tr><th>File        <td>SimpleIni.h
-<tr><th>Author      <td>Brodie Thiesfield [code at jellycan dot com]
-<tr><th>Source      <td>https://github.com/brofield/simpleini
-<tr><th>Version     <td>4.17
-</table>
+    <table>
+        <tr><th>Library     <td>SimpleIni
+        <tr><th>File        <td>SimpleIni.h
+        <tr><th>Author      <td>Brodie Thiesfield [code at jellycan dot com]
+        <tr><th>Source      <td>https://github.com/brofield/simpleini
+        <tr><th>Version     <td>4.17
+    </table>
 
-Jump to the @link CSimpleIniTempl CSimpleIni @endlink interface documentation.
+    Jump to the @link CSimpleIniTempl CSimpleIni @endlink interface documentation.
 
-@section intro INTRODUCTION
+    @section intro INTRODUCTION
 
-This component allows an INI-style configuration file to be used on both
-Windows and Linux/Unix. It is fast, simple and source code using this
-component will compile unchanged on either OS.
-
-
-@section features FEATURES
-
-- MIT Licence allows free use in all software (including GPL and commercial)
-- multi-platform (Windows 95/98/ME/NT/2K/XP/2003, Windows CE, Linux, Unix)
-- loading and saving of INI-style configuration files
-- configuration files can have any newline format on all platforms
-- liberal acceptance of file format
-- key/values with no section
-- removal of whitespace around sections, keys and values
-- support for multi-line values (values with embedded newline characters)
-- optional support for multiple keys with the same name
-- optional case-insensitive sections and keys (for ASCII characters only)
-- saves files with sections and keys in the same order as they were loaded
-- preserves comments on the file, section and keys where possible.
-- supports both char or wchar_t programming interfaces
-- supports both MBCS (system locale) and UTF-8 file encodings
-- system locale does not need to be UTF-8 on Linux/Unix to load UTF-8 file
-- support for non-ASCII characters in section, keys, values and comments
-- support for non-standard character types or file encodings
-via user-written converter classes
-- support for adding/modifying values programmatically
-- compiles cleanly in the following compilers:
-- Windows/VC6 (warning level 3)
-- Windows/VC.NET 2003 (warning level 4)
-- Windows/VC 2005 (warning level 4)
-- Linux/gcc (-Wall)
+    This component allows an INI-style configuration file to be used on both
+    Windows and Linux/Unix. It is fast, simple and source code using this
+    component will compile unchanged on either OS.
 
 
-@section usage USAGE SUMMARY
+    @section features FEATURES
 
--#  Define the appropriate symbol for the converter you wish to use and
-include the SimpleIni.h header file. If no specific converter is defined
-then the default converter is used. The default conversion mode uses
-SI_CONVERT_WIN32 on Windows and SI_CONVERT_GENERIC on all other
-platforms. If you are using ICU then SI_CONVERT_ICU is supported on all
-platforms.
--#  Declare an instance the appropriate class. Note that the following
-definitions are just shortcuts for commonly used types. Other types
-(PRUnichar, unsigned short, unsigned char) are also possible.
-<table>
-<tr><th>Interface   <th>Case-sensitive  <th>Load UTF-8  <th>Load MBCS   <th>Typedef
-<tr><th>SI_CONVERT_GENERIC
-<tr><td>char        <td>No              <td>Yes         <td>Yes #1      <td>CSimpleIniA
-<tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
-<tr><td>wchar_t     <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
-<tr><td>wchar_t     <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
-<tr><th>SI_CONVERT_WIN32
-<tr><td>char        <td>No              <td>No #2       <td>Yes         <td>CSimpleIniA
-<tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
-<tr><td>wchar_t     <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
-<tr><td>wchar_t     <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
-<tr><th>SI_CONVERT_ICU
-<tr><td>char        <td>No              <td>Yes         <td>Yes         <td>CSimpleIniA
-<tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
-<tr><td>UChar       <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
-<tr><td>UChar       <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
-</table>
-#1  On Windows you are better to use CSimpleIniA with SI_CONVERT_WIN32.<br>
-#2  Only affects Windows. On Windows this uses MBCS functions and
-so may fold case incorrectly leading to uncertain results.
--# Call LoadData() or LoadFile() to load and parse the INI configuration file
--# Access and modify the data of the file using the following functions
-<table>
-<tr><td>GetAllSections  <td>Return all section names
-<tr><td>GetAllKeys      <td>Return all key names within a section
-<tr><td>GetAllValues    <td>Return all values within a section & key
-<tr><td>GetSection      <td>Return all key names and values in a section
-<tr><td>GetSectionSize  <td>Return the number of keys in a section
-<tr><td>GetValue        <td>Return a value for a section & key
-<tr><td>SetValue        <td>Add or update a value for a section & key
-<tr><td>Delete          <td>Remove a section, or a key from a section
-</table>
--# Call Save() or SaveFile() to save the INI configuration data
+    - MIT Licence allows free use in all software (including GPL and commercial)
+    - multi-platform (Windows 95/98/ME/NT/2K/XP/2003, Windows CE, Linux, Unix)
+    - loading and saving of INI-style configuration files
+    - configuration files can have any newline format on all platforms
+    - liberal acceptance of file format
+        - key/values with no section
+        - removal of whitespace around sections, keys and values
+    - support for multi-line values (values with embedded newline characters)
+    - optional support for multiple keys with the same name
+    - optional case-insensitive sections and keys (for ASCII characters only)
+    - saves files with sections and keys in the same order as they were loaded
+    - preserves comments on the file, section and keys where possible.
+    - supports both char or wchar_t programming interfaces
+    - supports both MBCS (system locale) and UTF-8 file encodings
+    - system locale does not need to be UTF-8 on Linux/Unix to load UTF-8 file
+    - support for non-ASCII characters in section, keys, values and comments
+    - support for non-standard character types or file encodings
+      via user-written converter classes
+    - support for adding/modifying values programmatically
+    - compiles cleanly in the following compilers:
+        - Windows/VC6 (warning level 3)
+        - Windows/VC.NET 2003 (warning level 4)
+        - Windows/VC 2005 (warning level 4)
+        - Linux/gcc (-Wall)
 
-@section iostreams IO STREAMS
 
-SimpleIni supports reading from and writing to STL IO streams. Enable this
-by defining SI_SUPPORT_IOSTREAMS before including the SimpleIni.h header
-file. Ensure that if the streams are backed by a file (e.g. ifstream or
-ofstream) then the flag ios_base::binary has been used when the file was
-opened.
+    @section usage USAGE SUMMARY
 
-@section multiline MULTI-LINE VALUES
+    -#  Define the appropriate symbol for the converter you wish to use and
+        include the SimpleIni.h header file. If no specific converter is defined
+        then the default converter is used. The default conversion mode uses
+        SI_CONVERT_WIN32 on Windows and SI_CONVERT_GENERIC on all other
+        platforms. If you are using ICU then SI_CONVERT_ICU is supported on all
+        platforms.
+    -#  Declare an instance the appropriate class. Note that the following
+        definitions are just shortcuts for commonly used types. Other types
+        (PRUnichar, unsigned short, unsigned char) are also possible.
+        <table>
+            <tr><th>Interface   <th>Case-sensitive  <th>Load UTF-8  <th>Load MBCS   <th>Typedef
+        <tr><th>SI_CONVERT_GENERIC
+            <tr><td>char        <td>No              <td>Yes         <td>Yes #1      <td>CSimpleIniA
+            <tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
+            <tr><td>wchar_t     <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
+            <tr><td>wchar_t     <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
+        <tr><th>SI_CONVERT_WIN32
+            <tr><td>char        <td>No              <td>No #2       <td>Yes         <td>CSimpleIniA
+            <tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
+            <tr><td>wchar_t     <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
+            <tr><td>wchar_t     <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
+        <tr><th>SI_CONVERT_ICU
+            <tr><td>char        <td>No              <td>Yes         <td>Yes         <td>CSimpleIniA
+            <tr><td>char        <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseA
+            <tr><td>UChar       <td>No              <td>Yes         <td>Yes         <td>CSimpleIniW
+            <tr><td>UChar       <td>Yes             <td>Yes         <td>Yes         <td>CSimpleIniCaseW
+        </table>
+        #1  On Windows you are better to use CSimpleIniA with SI_CONVERT_WIN32.<br>
+        #2  Only affects Windows. On Windows this uses MBCS functions and
+            so may fold case incorrectly leading to uncertain results.
+    -# Call LoadData() or LoadFile() to load and parse the INI configuration file
+    -# Access and modify the data of the file using the following functions
+        <table>
+            <tr><td>GetAllSections  <td>Return all section names
+            <tr><td>GetAllKeys      <td>Return all key names within a section
+            <tr><td>GetAllValues    <td>Return all values within a section & key
+            <tr><td>GetSection      <td>Return all key names and values in a section
+            <tr><td>GetSectionSize  <td>Return the number of keys in a section
+            <tr><td>GetValue        <td>Return a value for a section & key
+            <tr><td>SetValue        <td>Add or update a value for a section & key
+            <tr><td>Delete          <td>Remove a section, or a key from a section
+        </table>
+    -# Call Save() or SaveFile() to save the INI configuration data
 
-Values that span multiple lines are created using the following format.
+    @section iostreams IO STREAMS
 
-<pre>
-key = <<<ENDTAG
-.... multiline value ....
-ENDTAG
-</pre>
+    SimpleIni supports reading from and writing to STL IO streams. Enable this
+    by defining SI_SUPPORT_IOSTREAMS before including the SimpleIni.h header
+    file. Ensure that if the streams are backed by a file (e.g. ifstream or
+    ofstream) then the flag ios_base::binary has been used when the file was
+    opened.
 
-Note the following:
-- The text used for ENDTAG can be anything and is used to find
-where the multi-line text ends.
-- The newline after ENDTAG in the start tag, and the newline
-before ENDTAG in the end tag is not included in the data value.
-- The ending tag must be on it's own line with no whitespace before
-or after it.
-- The multi-line value is modified at load so that each line in the value
-is delimited by a single '\\n' character on all platforms. At save time
-it will be converted into the newline format used by the current
-platform.
+    @section multiline MULTI-LINE VALUES
 
-@section comments COMMENTS
+    Values that span multiple lines are created using the following format.
 
-Comments are preserved in the file within the following restrictions:
-- Every file may have a single "file comment". It must start with the
-first character in the file, and will end with the first non-comment
-line in the file.
-- Every section may have a single "section comment". It will start
-with the first comment line following the file comment, or the last
-data entry. It ends at the beginning of the section.
-- Every key may have a single "key comment". This comment will start
-with the first comment line following the section start, or the file
-comment if there is no section name.
-- Comments are set at the time that the file, section or key is first
-created. The only way to modify a comment on a section or a key is to
-delete that entry and recreate it with the new comment. There is no
-way to change the file comment.
+        <pre>
+        key = <<<ENDTAG
+        .... multiline value ....
+        ENDTAG
+        </pre>
 
-@section save SAVE ORDER
+    Note the following:
+    - The text used for ENDTAG can be anything and is used to find
+      where the multi-line text ends.
+    - The newline after ENDTAG in the start tag, and the newline
+      before ENDTAG in the end tag is not included in the data value.
+    - The ending tag must be on it's own line with no whitespace before
+      or after it.
+    - The multi-line value is modified at load so that each line in the value
+      is delimited by a single '\\n' character on all platforms. At save time
+      it will be converted into the newline format used by the current
+      platform.
 
-The sections and keys are written out in the same order as they were
-read in from the file. Sections and keys added to the data after the
-file has been loaded will be added to the end of the file when it is
-written. There is no way to specify the location of a section or key
-other than in first-created, first-saved order.
+    @section comments COMMENTS
 
-@section notes NOTES
+    Comments are preserved in the file within the following restrictions:
+    - Every file may have a single "file comment". It must start with the
+      first character in the file, and will end with the first non-comment
+      line in the file.
+    - Every section may have a single "section comment". It will start
+      with the first comment line following the file comment, or the last
+      data entry. It ends at the beginning of the section.
+    - Every key may have a single "key comment". This comment will start
+      with the first comment line following the section start, or the file
+      comment if there is no section name.
+    - Comments are set at the time that the file, section or key is first
+      created. The only way to modify a comment on a section or a key is to
+      delete that entry and recreate it with the new comment. There is no
+      way to change the file comment.
 
-- To load UTF-8 data on Windows 95, you need to use Microsoft Layer for
-Unicode, or SI_CONVERT_GENERIC, or SI_CONVERT_ICU.
-- When using SI_CONVERT_GENERIC, ConvertUTF.c must be compiled and linked.
-- When using SI_CONVERT_ICU, ICU header files must be on the include
-path and icuuc.lib must be linked in.
-- To load a UTF-8 file on Windows AND expose it with SI_CHAR == char,
-you should use SI_CONVERT_GENERIC.
-- The collation (sorting) order used for sections and keys returned from
-iterators is NOT DEFINED. If collation order of the text is important
-then it should be done yourself by either supplying a replacement
-SI_STRLESS class, or by sorting the strings external to this library.
-- Usage of the <mbstring.h> header on Windows can be disabled by defining
-SI_NO_MBCS. This is defined automatically on Windows CE platforms.
-- Not thread-safe so manage your own locking
+    @section save SAVE ORDER
 
-@section contrib CONTRIBUTIONS
+    The sections and keys are written out in the same order as they were
+    read in from the file. Sections and keys added to the data after the
+    file has been loaded will be added to the end of the file when it is
+    written. There is no way to specify the location of a section or key
+    other than in first-created, first-saved order.
 
-- 2010/05/03: Tobias Gehrig: added GetDoubleValue()
+    @section notes NOTES
 
-@section licence MIT LICENCE
+    - To load UTF-8 data on Windows 95, you need to use Microsoft Layer for
+      Unicode, or SI_CONVERT_GENERIC, or SI_CONVERT_ICU.
+    - When using SI_CONVERT_GENERIC, ConvertUTF.c must be compiled and linked.
+    - When using SI_CONVERT_ICU, ICU header files must be on the include
+      path and icuuc.lib must be linked in.
+    - To load a UTF-8 file on Windows AND expose it with SI_CHAR == char,
+      you should use SI_CONVERT_GENERIC.
+    - The collation (sorting) order used for sections and keys returned from
+      iterators is NOT DEFINED. If collation order of the text is important
+      then it should be done yourself by either supplying a replacement
+      SI_STRLESS class, or by sorting the strings external to this library.
+    - Usage of the <mbstring.h> header on Windows can be disabled by defining
+      SI_NO_MBCS. This is defined automatically on Windows CE platforms.
+    - Not thread-safe so manage your own locking
 
-The licence text below is the boilerplate "MIT Licence" used from:
-http://www.opensource.org/licenses/mit-license.php
+    @section contrib CONTRIBUTIONS
+    
+    - 2010/05/03: Tobias Gehrig: added GetDoubleValue()
 
-Copyright (c) 2006-2012, Brodie Thiesfield
+    @section licence MIT LICENCE
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished
-to do so, subject to the following conditions:
+    The licence text below is the boilerplate "MIT Licence" used from:
+    http://www.opensource.org/licenses/mit-license.php
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+    Copyright (c) 2006-2012, Brodie Thiesfield
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is furnished
+    to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+    IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #ifndef INCLUDED_SimpleIni_h
@@ -235,21 +235,20 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #endif
 
 enum SI_Error {
-    SI_OK = 0,   //!< No error
-    SI_UPDATED = 1,   //!< An existing value was updated
-    SI_INSERTED = 2,   //!< A new value was inserted
-    SI_NOCHANGE = 3,  //!< value is the same
+    SI_OK       =  0,   //!< No error
+    SI_UPDATED  =  1,   //!< An existing value was updated
+    SI_INSERTED =  2,   //!< A new value was inserted
+    SI_NOCHANGE =  3,   //!< value is the same
 
     // note: test for any error with (retval < 0)
-    SI_FAIL = -1,   //!< Generic failure
-    SI_NOMEM = -2,   //!< Out of memory error
-    SI_FILE = -3    //!< File error (see errno for detail error)
+    SI_FAIL     = -1,   //!< Generic failure
+    SI_NOMEM    = -2,   //!< Out of memory error
+    SI_FILE     = -3    //!< File error (see errno for detail error)
 };
 
-#define SI_UTF8_SIGNATURE	      "\xEF\xBB\xBF"
-#define SI_UTF16_SIGNATURE_LITTLE "\xFF\xFE"
+#define SI_UTF8_SIGNATURE           "\xEF\xBB\xBF"
+#define SI_UTF16_SIGNATURE_LITTLE   "\xFF\xFE"
 //#define SI_UTF16_SIGNATURE_BIG    "\xFE\xFF"
-
 
 /** enum of text encode
 */
@@ -288,23 +287,23 @@ enum Encode
 
 /** Simple INI file reader.
 
-This can be instantiated with the choice of unicode or native characterset,
-and case sensitive or insensitive comparisons of section and key names.
-The supported combinations are pre-defined with the following typedefs:
+    This can be instantiated with the choice of unicode or native characterset,
+    and case sensitive or insensitive comparisons of section and key names.
+    The supported combinations are pre-defined with the following typedefs:
 
-<table>
-<tr><th>Interface   <th>Case-sensitive  <th>Typedef
-<tr><td>char        <td>No              <td>CSimpleIniA
-<tr><td>char        <td>Yes             <td>CSimpleIniCaseA
-<tr><td>wchar_t     <td>No              <td>CSimpleIniW
-<tr><td>wchar_t     <td>Yes             <td>CSimpleIniCaseW
-</table>
+    <table>
+        <tr><th>Interface   <th>Case-sensitive  <th>Typedef
+        <tr><td>char        <td>No              <td>CSimpleIniA
+        <tr><td>char        <td>Yes             <td>CSimpleIniCaseA
+        <tr><td>wchar_t     <td>No              <td>CSimpleIniW
+        <tr><td>wchar_t     <td>Yes             <td>CSimpleIniCaseW
+    </table>
 
-Note that using other types for the SI_CHAR is supported. For instance,
-unsigned char, unsigned short, etc. Note that where the alternative type
-is a different size to char/wchar_t you may need to supply new helper
-classes for SI_STRLESS and SI_CONVERTER.
-*/
+    Note that using other types for the SI_CHAR is supported. For instance,
+    unsigned char, unsigned short, etc. Note that where the alternative type
+    is a different size to char/wchar_t you may need to supply new helper
+    classes for SI_STRLESS and SI_CONVERTER.
+ */
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 class CSimpleIniTempl
 {
@@ -329,9 +328,9 @@ public:
         { }
         Entry(const Entry & rhs) { operator=(rhs); }
         Entry & operator=(const Entry & rhs) {
-            pItem = rhs.pItem;
+            pItem    = rhs.pItem;
             pComment = rhs.pComment;
-            nOrder = rhs.nOrder;
+            nOrder   = rhs.nOrder;
             return *this;
         }
 
@@ -361,18 +360,18 @@ public:
     };
 
     /** map keys to values */
-    typedef std::multimap<Entry, const SI_CHAR *, typename Entry::KeyOrder> TKeyVal;
+    typedef std::multimap<Entry,const SI_CHAR *,typename Entry::KeyOrder> TKeyVal;
 
     /** map sections to key/value map */
-    typedef std::map<Entry, TKeyVal, typename Entry::KeyOrder> TSection;
+    typedef std::map<Entry,TKeyVal,typename Entry::KeyOrder> TSection;
 
     /** set of dependent string pointers. Note that these pointers are
-    dependent on memory owned by CSimpleIni.
+        dependent on memory owned by CSimpleIni.
     */
     typedef std::list<Entry> TNamesDepend;
 
     /** interface definition for the OutputWriter object to pass to Save()
-    in order to output the INI file data.
+        in order to output the INI file data.
     */
     class OutputWriter {
     public:
@@ -426,7 +425,7 @@ public:
 #endif // SI_SUPPORT_IOSTREAMS
 
     /** Characterset conversion utility class to convert strings to the
-    same format as is used for the storage.
+        same format as is used for the storage.
     */
     class Converter : private SI_CONVERTER {
     public:
@@ -461,13 +460,13 @@ public:
 
     /** Default constructor.
 
-    @param a_bIsUtf8     See the method SetUnicode() for details.
-    @param a_bMultiKey   See the method SetMultiKey() for details.
-    @param a_bMultiLine  See the method SetMultiLine() for details.
-    */
+        @param a_bIsUtf8     See the method SetUnicode() for details.
+        @param a_bMultiKey   See the method SetMultiKey() for details.
+        @param a_bMultiLine  See the method SetMultiLine() for details.
+     */
     CSimpleIniTempl(
         Encode a_eFormat = MBCS,
-        bool a_bMultiKey = false,
+        bool a_bMultiKey  = false,
         bool a_bMultiLine = false
         );
 
@@ -484,19 +483,19 @@ public:
     /** @{ @name Settings */
 
     /** Set the storage format of the INI data. This affects both the loading
-    and saving of the INI data using all of the Load/Save API functions.
-    This value cannot be changed after any INI data has been loaded.
+        and saving of the INI data using all of the Load/Save API functions.
+        This value cannot be changed after any INI data has been loaded.
 
-    If the file is not set to Unicode (UTF-8), then the data encoding is
-    assumed to be the OS native encoding. This encoding is the system
-    locale on Linux/Unix and the legacy MBCS encoding on Windows NT/2K/XP.
-    If the storage format is set to Unicode then the file will be loaded
-    as UTF-8 encoded data regardless of the native file encoding. If
-    SI_CHAR == char then all of the char* parameters take and return UTF-8
-    encoded data regardless of the system locale.
+        If the file is not set to Unicode (UTF-8), then the data encoding is
+        assumed to be the OS native encoding. This encoding is the system
+        locale on Linux/Unix and the legacy MBCS encoding on Windows NT/2K/XP.
+        If the storage format is set to Unicode then the file will be loaded
+        as UTF-8 encoded data regardless of the native file encoding. If
+        SI_CHAR == char then all of the char* parameters take and return UTF-8
+        encoded data regardless of the system locale.
 
-    \param a_bIsUtf8     Assume UTF-8 encoding for the source?
-    */
+        \param a_bIsUtf8     Assume UTF-8 encoding for the source?
+     */
     void SetFormat(Encode a_eFormat = UTF16_LITTLE) {
         if (!m_pData) m_eStoreFormat = a_eFormat;
     }
@@ -507,23 +506,23 @@ public:
     bool GetFormat() const { return m_eStoreFormat; }
 
     /** Should multiple identical keys be permitted in the file. If set to false
-    then the last value encountered will be used as the value of the key.
-    If set to true, then all values will be available to be queried. For
-    example, with the following input:
+        then the last value encountered will be used as the value of the key.
+        If set to true, then all values will be available to be queried. For
+        example, with the following input:
 
-    <pre>
-    [section]
-    test=value1
-    test=value2
-    </pre>
+        <pre>
+        [section]
+        test=value1
+        test=value2
+        </pre>
 
-    Then with SetMultiKey(true), both of the values "value1" and "value2"
-    will be returned for the key test. If SetMultiKey(false) is used, then
-    the value for "test" will only be "value2". This value may be changed
-    at any time.
+        Then with SetMultiKey(true), both of the values "value1" and "value2"
+        will be returned for the key test. If SetMultiKey(false) is used, then
+        the value for "test" will only be "value2". This value may be changed
+        at any time.
 
-    \param a_bAllowMultiKey  Allow multi-keys in the source?
-    */
+        \param a_bAllowMultiKey  Allow multi-keys in the source?
+     */
     void SetMultiKey(bool a_bAllowMultiKey = true) {
         m_bAllowMultiKey = a_bAllowMultiKey;
     }
@@ -532,12 +531,12 @@ public:
     bool IsMultiKey() const { return m_bAllowMultiKey; }
 
     /** Should data values be permitted to span multiple lines in the file. If
-    set to false then the multi-line construct <<<TAG as a value will be
-    returned as is instead of loading the data. This value may be changed
-    at any time.
+        set to false then the multi-line construct <<<TAG as a value will be
+        returned as is instead of loading the data. This value may be changed
+        at any time.
 
-    \param a_bAllowMultiLine     Allow multi-line values in the source?
-    */
+        \param a_bAllowMultiLine     Allow multi-line values in the source?
+     */
     void SetMultiLine(bool a_bAllowMultiLine = true) {
         m_bAllowMultiLine = a_bAllowMultiLine;
     }
@@ -546,30 +545,30 @@ public:
     bool IsMultiLine() const { return m_bAllowMultiLine; }
 
     /** Should spaces be added around the equals sign when writing key/value
-    pairs out. When true, the result will be "key = value". When false,
-    the result will be "key=value". This value may be changed at any time.
+        pairs out. When true, the result will be "key = value". When false, 
+        the result will be "key=value". This value may be changed at any time.
 
-    \param a_bSpaces     Add spaces around the equals sign?
-    */
+        \param a_bSpaces     Add spaces around the equals sign?
+     */
     void SetSpaces(bool a_bSpaces = true) {
         m_bSpaces = a_bSpaces;
     }
 
     /** Query the status of spaces output */
     bool UsingSpaces() const { return m_bSpaces; }
-
+    
     /*-----------------------------------------------------------------------*/
     /** @}
-    @{ @name Loading INI Data */
+        @{ @name Loading INI Data */
 
     /** Load an INI file from disk into memory
 
-    @param a_pszFile    Path of the file to be loaded. This will be passed
-    to fopen() and so must be a valid path for the
-    current platform.
+        @param a_pszFile    Path of the file to be loaded. This will be passed
+                            to fopen() and so must be a valid path for the
+                            current platform.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error LoadFile(
         const char * a_pszFile
         );
@@ -577,10 +576,10 @@ public:
 #ifdef SI_HAS_WIDE_FILE
     /** Load an INI file from disk into memory
 
-    @param a_pwszFile   Path of the file to be loaded in UTF-16.
+        @param a_pwszFile   Path of the file to be loaded in UTF-16.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error LoadFile(
         const SI_WCHAR_T * a_pwszFile
         );
@@ -588,10 +587,10 @@ public:
 
     /** Load the file from a file pointer.
 
-    @param a_fpFile     Valid file pointer to read the file data from. The
-    file will be read until end of file.
+        @param a_fpFile     Valid file pointer to read the file data from. The
+                            file will be read until end of file.
 
-    @return SI_Error    See error definitions
+        @return SI_Error    See error definitions
     */
     SI_Error LoadFile(
         FILE * a_fpFile
@@ -600,10 +599,10 @@ public:
 #ifdef SI_SUPPORT_IOSTREAMS
     /** Load INI file data from an istream.
 
-    @param a_istream    Stream to read from
+        @param a_istream    Stream to read from
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error LoadData(
         std::istream & a_istream
         );
@@ -611,27 +610,27 @@ public:
 
     /** Load INI file data direct from a std::string
 
-    @param a_strData    Data to be loaded
+        @param a_strData    Data to be loaded
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error LoadData(const std::string & a_strData) {
         return LoadData(a_strData.c_str(), a_strData.size());
     }
 
     /** Load INI file data direct from memory
 
-    @param a_pData      Data to be loaded
-    @param a_uDataLen   Length of the data in bytes
+        @param a_pData      Data to be loaded
+        @param a_uDataLen   Length of the data in bytes
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error LoadData(
         const char *    a_pData,
         size_t          a_uDataLen
         );
     SI_Error LoadData(
-        const wchar_t *    a_pData,
+        const wchar_t * a_pData,
         size_t          a_uDataLen
         );
     SI_Error LoadData(
@@ -641,20 +640,20 @@ public:
         );
     /*-----------------------------------------------------------------------*/
     /** @}
-    @{ @name Saving INI Data */
+        @{ @name Saving INI Data */
 
     /** Save an INI file from memory to disk
 
-    @param a_pszFile    Path of the file to be saved. This will be passed
-    to fopen() and so must be a valid path for the
-    current platform.
+        @param a_pszFile    Path of the file to be saved. This will be passed
+                            to fopen() and so must be a valid path for the
+                            current platform.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is
-    in UTF-8 format. If it is not UTF-8 then
-    this parameter is ignored.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is
+                            in UTF-8 format. If it is not UTF-8 then
+                            this parameter is ignored.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error SaveFile(
         const char *    a_pszFile,
         bool            a_bAddSignature = true
@@ -663,14 +662,14 @@ public:
 #ifdef SI_HAS_WIDE_FILE
     /** Save an INI file from memory to disk
 
-    @param a_pwszFile   Path of the file to be saved in UTF-16.
+        @param a_pwszFile   Path of the file to be saved in UTF-16.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is
-    in UTF-8 format. If it is not UTF-8 then
-    this parameter is ignored.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is
+                            in UTF-8 format. If it is not UTF-8 then
+                            this parameter is ignored.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error SaveFile(
         const SI_WCHAR_T *  a_pwszFile,
         bool                a_bAddSignature = true
@@ -679,52 +678,52 @@ public:
 
     /** Save the INI data to a file. See Save() for details.
 
-    @param a_pFile      Handle to a file. File should be opened for
-    binary output.
+        @param a_pFile      Handle to a file. File should be opened for
+                            binary output.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
-    UTF-8 format. If it is not UTF-8 then this value is
-    ignored. Do not set this to true if anything has
-    already been written to the file.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
+                            UTF-8 format. If it is not UTF-8 then this value is
+                            ignored. Do not set this to true if anything has
+                            already been written to the file.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error SaveFile(
         FILE *  a_pFile,
         bool    a_bAddSignature = false
         ) const;
 
     /** Save the INI data. The data will be written to the output device
-    in a format appropriate to the current data, selected by:
+        in a format appropriate to the current data, selected by:
 
-    <table>
-    <tr><th>SI_CHAR     <th>FORMAT
-    <tr><td>char        <td>same format as when loaded (MBCS or UTF-8)
-    <tr><td>wchar_t     <td>UTF-8
-    <tr><td>other       <td>UTF-8
-    </table>
+        <table>
+            <tr><th>SI_CHAR     <th>FORMAT
+            <tr><td>char        <td>same format as when loaded (MBCS or UTF-8)
+            <tr><td>wchar_t     <td>UTF-8
+            <tr><td>other       <td>UTF-8
+        </table>
 
-    Note that comments from the original data is preserved as per the
-    documentation on comments. The order of the sections and values
-    from the original file will be preserved.
+        Note that comments from the original data is preserved as per the
+        documentation on comments. The order of the sections and values
+        from the original file will be preserved.
 
-    Any data prepended or appended to the output device must use the the
-    same format (MBCS or UTF-8). You may use the GetConverter() method to
-    convert text to the correct format regardless of the output format
-    being used by SimpleIni.
+        Any data prepended or appended to the output device must use the the
+        same format (MBCS or UTF-8). You may use the GetConverter() method to
+        convert text to the correct format regardless of the output format
+        being used by SimpleIni.
 
-    To add a BOM to UTF-8 data, write it out manually at the very beginning
-    like is done in SaveFile when a_bUseBOM is true.
+        To add a BOM to UTF-8 data, write it out manually at the very beginning
+        like is done in SaveFile when a_bUseBOM is true.
 
-    @param a_oOutput    Output writer to write the data to.
+        @param a_oOutput    Output writer to write the data to.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
-    UTF-8 format. If it is not UTF-8 then this value is
-    ignored. Do not set this to true if anything has
-    already been written to the OutputWriter.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
+                            UTF-8 format. If it is not UTF-8 then this value is
+                            ignored. Do not set this to true if anything has
+                            already been written to the OutputWriter.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error Save(
         OutputWriter &  a_oOutput,
         bool            a_bAddSignature = false
@@ -733,15 +732,15 @@ public:
 #ifdef SI_SUPPORT_IOSTREAMS
     /** Save the INI data to an ostream. See Save() for details.
 
-    @param a_ostream    String to have the INI data appended to.
+        @param a_ostream    String to have the INI data appended to.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
-    UTF-8 format. If it is not UTF-8 then this value is
-    ignored. Do not set this to true if anything has
-    already been written to the stream.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
+                            UTF-8 format. If it is not UTF-8 then this value is
+                            ignored. Do not set this to true if anything has
+                            already been written to the stream.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error Save(
         std::ostream &  a_ostream,
         bool            a_bAddSignature = false
@@ -754,15 +753,15 @@ public:
 
     /** Append the INI data to a string. See Save() for details.
 
-    @param a_sBuffer    String to have the INI data appended to.
+        @param a_sBuffer    String to have the INI data appended to.
 
-    @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
-    UTF-8 format. If it is not UTF-8 then this value is
-    ignored. Do not set this to true if anything has
-    already been written to the string.
+        @param a_bAddSignature  Prepend the UTF-8 BOM if the output data is in
+                            UTF-8 format. If it is not UTF-8 then this value is
+                            ignored. Do not set this to true if anything has
+                            already been written to the string.
 
-    @return SI_Error    See error definitions
-    */
+        @return SI_Error    See error definitions
+     */
     SI_Error Save(
         std::string &   a_sBuffer,
         bool            a_bAddSignature = false
@@ -774,64 +773,64 @@ public:
 
     /*-----------------------------------------------------------------------*/
     /** @}
-    @{ @name Accessing INI Data */
+        @{ @name Accessing INI Data */
 
     /** Retrieve all section names. The list is returned as an STL vector of
-    names and can be iterated or searched as necessary. Note that the
-    sort order of the returned strings is NOT DEFINED. You can sort
-    the names into the load order if desired. Search this file for ".sort"
-    for an example.
+        names and can be iterated or searched as necessary. Note that the
+        sort order of the returned strings is NOT DEFINED. You can sort
+        the names into the load order if desired. Search this file for ".sort"
+        for an example.
 
-    NOTE! This structure contains only pointers to strings. The actual
-    string data is stored in memory owned by CSimpleIni. Ensure that the
-    CSimpleIni object is not destroyed or Reset() while these pointers
-    are in use!
+        NOTE! This structure contains only pointers to strings. The actual
+        string data is stored in memory owned by CSimpleIni. Ensure that the
+        CSimpleIni object is not destroyed or Reset() while these pointers
+        are in use!
 
-    @param a_names          Vector that will receive all of the section
-    names. See note above!
-    */
+        @param a_names          Vector that will receive all of the section
+                                 names. See note above!
+     */
     void GetAllSections(
         TNamesDepend & a_names
         ) const;
 
     /** Retrieve all unique key names in a section. The sort order of the
-    returned strings is NOT DEFINED. You can sort the names into the load
-    order if desired. Search this file for ".sort" for an example. Only
-    unique key names are returned.
+        returned strings is NOT DEFINED. You can sort the names into the load 
+        order if desired. Search this file for ".sort" for an example. Only 
+        unique key names are returned.
 
-    NOTE! This structure contains only pointers to strings. The actual
-    string data is stored in memory owned by CSimpleIni. Ensure that the
-    CSimpleIni object is not destroyed or Reset() while these strings
-    are in use!
+        NOTE! This structure contains only pointers to strings. The actual
+        string data is stored in memory owned by CSimpleIni. Ensure that the
+        CSimpleIni object is not destroyed or Reset() while these strings
+        are in use!
 
-    @param a_pSection       Section to request data for
-    @param a_names          List that will receive all of the key
-    names. See note above!
+        @param a_pSection       Section to request data for
+        @param a_names          List that will receive all of the key
+                                 names. See note above!
 
-    @return true            Section was found.
-    @return false           Matching section was not found.
-    */
+        @return true            Section was found.
+        @return false           Matching section was not found.
+     */
     bool GetAllKeys(
         const SI_CHAR * a_pSection,
         TNamesDepend &  a_names
         ) const;
 
     /** Retrieve all values for a specific key. This method can be used when
-    multiple keys are both enabled and disabled. Note that the sort order
-    of the returned strings is NOT DEFINED. You can sort the names into
-    the load order if desired. Search this file for ".sort" for an example.
+        multiple keys are both enabled and disabled. Note that the sort order 
+        of the returned strings is NOT DEFINED. You can sort the names into 
+        the load order if desired. Search this file for ".sort" for an example.
 
-    NOTE! The returned values are pointers to string data stored in memory
-    owned by CSimpleIni. Ensure that the CSimpleIni object is not destroyed
-    or Reset while you are using this pointer!
+        NOTE! The returned values are pointers to string data stored in memory
+        owned by CSimpleIni. Ensure that the CSimpleIni object is not destroyed
+        or Reset while you are using this pointer!
 
-    @param a_pSection       Section to search
-    @param a_pKey           Key to search for
-    @param a_values         List to return if the key is not found
+        @param a_pSection       Section to search
+        @param a_pKey           Key to search for
+        @param a_values         List to return if the key is not found
 
-    @return true            Key was found.
-    @return false           Matching section/key was not found.
-    */
+        @return true            Key was found.
+        @return false           Matching section/key was not found.
+     */
     bool GetAllValues(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
@@ -839,162 +838,162 @@ public:
         ) const;
 
     /** Query the number of keys in a specific section. Note that if multiple
-    keys are enabled, then this value may be different to the number of
-    keys returned by GetAllKeys.
+        keys are enabled, then this value may be different to the number of
+        keys returned by GetAllKeys.
 
-    @param a_pSection       Section to request data for
+        @param a_pSection       Section to request data for
 
-    @return -1              Section does not exist in the file
-    @return >=0             Number of keys in the section
-    */
+        @return -1              Section does not exist in the file
+        @return >=0             Number of keys in the section
+     */
     int GetSectionSize(
         const SI_CHAR * a_pSection
         ) const;
 
     /** Retrieve all key and value pairs for a section. The data is returned
-    as a pointer to an STL map and can be iterated or searched as
-    desired. Note that multiple entries for the same key may exist when
-    multiple keys have been enabled.
+        as a pointer to an STL map and can be iterated or searched as
+        desired. Note that multiple entries for the same key may exist when
+        multiple keys have been enabled.
 
-    NOTE! This structure contains only pointers to strings. The actual
-    string data is stored in memory owned by CSimpleIni. Ensure that the
-    CSimpleIni object is not destroyed or Reset() while these strings
-    are in use!
+        NOTE! This structure contains only pointers to strings. The actual
+        string data is stored in memory owned by CSimpleIni. Ensure that the
+        CSimpleIni object is not destroyed or Reset() while these strings
+        are in use!
 
-    @param a_pSection       Name of the section to return
-    @return boolean         Was a section matching the supplied
-    name found.
-    */
+        @param a_pSection       Name of the section to return
+        @return boolean         Was a section matching the supplied
+                                name found.
+     */
     const TKeyVal * GetSection(
         const SI_CHAR * a_pSection
         ) const;
 
     /** Retrieve the value for a specific key. If multiple keys are enabled
-    (see SetMultiKey) then only the first value associated with that key
-    will be returned, see GetAllValues for getting all values with multikey.
+        (see SetMultiKey) then only the first value associated with that key
+        will be returned, see GetAllValues for getting all values with multikey.
 
-    NOTE! The returned value is a pointer to string data stored in memory
-    owned by CSimpleIni. Ensure that the CSimpleIni object is not destroyed
-    or Reset while you are using this pointer!
+        NOTE! The returned value is a pointer to string data stored in memory
+        owned by CSimpleIni. Ensure that the CSimpleIni object is not destroyed
+        or Reset while you are using this pointer!
 
-    @param a_pSection       Section to search
-    @param a_pKey           Key to search for
-    @param a_pDefault       Value to return if the key is not found
-    @param a_pHasMultiple   Optionally receive notification of if there are
-    multiple entries for this key.
+        @param a_pSection       Section to search
+        @param a_pKey           Key to search for
+        @param a_pDefault       Value to return if the key is not found
+        @param a_pHasMultiple   Optionally receive notification of if there are
+                                multiple entries for this key.
 
-    @return a_pDefault      Key was not found in the section
-    @return other           Value of the key
-    */
+        @return a_pDefault      Key was not found in the section
+        @return other           Value of the key
+     */
     const SI_CHAR * GetValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
-        const SI_CHAR * a_pDefault = NULL,
+        const SI_CHAR * a_pDefault     = NULL,
         bool *          a_pHasMultiple = NULL
         ) const;
 
     /** Retrieve a numeric value for a specific key. If multiple keys are enabled
-    (see SetMultiKey) then only the first value associated with that key
-    will be returned, see GetAllValues for getting all values with multikey.
+        (see SetMultiKey) then only the first value associated with that key
+        will be returned, see GetAllValues for getting all values with multikey.
 
-    @param a_pSection       Section to search
-    @param a_pKey           Key to search for
-    @param a_nDefault       Value to return if the key is not found
-    @param a_pHasMultiple   Optionally receive notification of if there are
-    multiple entries for this key.
+        @param a_pSection       Section to search
+        @param a_pKey           Key to search for
+        @param a_nDefault       Value to return if the key is not found
+        @param a_pHasMultiple   Optionally receive notification of if there are
+                                multiple entries for this key.
 
-    @return a_nDefault      Key was not found in the section
-    @return other           Value of the key
-    */
+        @return a_nDefault      Key was not found in the section
+        @return other           Value of the key
+     */
     bool GetLongValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         long*           a_pRet,
-        long            a_nDefault = 0,
+        long            a_nDefault     = 0,
         bool *          a_pHasMultiple = NULL
         ) const;
 
     /** Retrieve a numeric value for a specific key. If multiple keys are enabled
-    (see SetMultiKey) then only the first value associated with that key
-    will be returned, see GetAllValues for getting all values with multikey.
+        (see SetMultiKey) then only the first value associated with that key
+        will be returned, see GetAllValues for getting all values with multikey.
 
-    @param a_pSection       Section to search
-    @param a_pKey           Key to search for
-    @param a_nDefault       Value to return if the key is not found
-    @param a_pHasMultiple   Optionally receive notification of if there are
-    multiple entries for this key.
+        @param a_pSection       Section to search
+        @param a_pKey           Key to search for
+        @param a_nDefault       Value to return if the key is not found
+        @param a_pHasMultiple   Optionally receive notification of if there are
+                                multiple entries for this key.
 
-    @return a_nDefault      Key was not found in the section
-    @return other           Value of the key
-    */
+        @return a_nDefault      Key was not found in the section
+        @return other           Value of the key
+     */
     bool GetDoubleValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         double*         a_pRet,
-        double          a_nDefault = 0,
+        double          a_nDefault     = 0,
         bool *          a_pHasMultiple = NULL
         ) const;
 
     /** Retrieve a boolean value for a specific key. If multiple keys are enabled
-    (see SetMultiKey) then only the first value associated with that key
-    will be returned, see GetAllValues for getting all values with multikey.
+        (see SetMultiKey) then only the first value associated with that key
+        will be returned, see GetAllValues for getting all values with multikey.
 
-    Strings starting with "t", "y", "on" or "1" are returned as logically true.
-    Strings starting with "f", "n", "of" or "0" are returned as logically false.
-    For all other values the default is returned. Character comparisons are
-    case-insensitive.
+        Strings starting with "t", "y", "on" or "1" are returned as logically true.
+        Strings starting with "f", "n", "of" or "0" are returned as logically false.
+        For all other values the default is returned. Character comparisons are 
+        case-insensitive.
 
-    @param a_pSection       Section to search
-    @param a_pKey           Key to search for
-    @param a_bDefault       Value to return if the key is not found
-    @param a_pHasMultiple   Optionally receive notification of if there are
-    multiple entries for this key.
+        @param a_pSection       Section to search
+        @param a_pKey           Key to search for
+        @param a_bDefault       Value to return if the key is not found
+        @param a_pHasMultiple   Optionally receive notification of if there are
+                                multiple entries for this key.
 
-    @return a_nDefault      Key was not found in the section
-    @return other           Value of the key
-    */
+        @return a_nDefault      Key was not found in the section
+        @return other           Value of the key
+     */
     bool GetBoolValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         bool*           a_pRet,
-        bool            a_bDefault = false,
+        bool            a_bDefault     = false,
         bool *          a_pHasMultiple = NULL
         ) const;
 
     /** Add or update a section or value. This will always insert
-    when multiple keys are enabled.
+        when multiple keys are enabled.
 
-    @param a_pSection   Section to add or update
-    @param a_pKey       Key to add or update. Set to NULL to
-    create an empty section.
-    @param a_pValue     Value to set. Set to NULL to create an
-    empty section.
-    @param a_pComment   Comment to be associated with the section or the
-    key. If a_pKey is NULL then it will be associated
-    with the section, otherwise the key. Note that a
-    comment may be set ONLY when the section or key is
-    first created (i.e. when this function returns the
-    value SI_INSERTED). If you wish to create a section
-    with a comment then you need to create the section
-    separately to the key. The comment string must be
-    in full comment form already (have a comment
-    character starting every line).
-    @param a_bForceReplace  Should all existing values in a multi-key INI
-    file be replaced with this entry. This option has
-    no effect if not using multi-key files. The
-    difference between Delete/SetValue and SetValue
-    with a_bForceReplace = true, is that the load
-    order and comment will be preserved this way.
+        @param a_pSection   Section to add or update
+        @param a_pKey       Key to add or update. Set to NULL to
+                            create an empty section.
+        @param a_pValue     Value to set. Set to NULL to create an
+                            empty section.
+        @param a_pComment   Comment to be associated with the section or the
+                            key. If a_pKey is NULL then it will be associated
+                            with the section, otherwise the key. Note that a
+                            comment may be set ONLY when the section or key is
+                            first created (i.e. when this function returns the
+                            value SI_INSERTED). If you wish to create a section
+                            with a comment then you need to create the section
+                            separately to the key. The comment string must be
+                            in full comment form already (have a comment
+                            character starting every line).
+        @param a_bForceReplace  Should all existing values in a multi-key INI
+                            file be replaced with this entry. This option has
+                            no effect if not using multi-key files. The 
+                            difference between Delete/SetValue and SetValue
+                            with a_bForceReplace = true, is that the load 
+                            order and comment will be preserved this way.
 
-    @return SI_Error    See error definitions
-    @return SI_UPDATED  Value was updated
-    @return SI_INSERTED Value was inserted
-    */
+        @return SI_Error    See error definitions
+        @return SI_UPDATED  Value was updated
+        @return SI_INSERTED Value was inserted
+     */
     SI_Error SetValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         const SI_CHAR * a_pValue,
-        const SI_CHAR * a_pComment = NULL,
+        const SI_CHAR * a_pComment      = NULL,
         bool            a_bForceReplace = false
         )
     {
@@ -1002,111 +1001,111 @@ public:
     }
 
     /** Add or update a numeric value. This will always insert
-    when multiple keys are enabled.
+        when multiple keys are enabled.
 
-    @param a_pSection   Section to add or update
-    @param a_pKey       Key to add or update.
-    @param a_nValue     Value to set.
-    @param a_pComment   Comment to be associated with the key. See the
-    notes on SetValue() for comments.
-    @param a_bUseHex    By default the value will be written to the file
-    in decimal format. Set this to true to write it
-    as hexadecimal.
-    @param a_bForceReplace  Should all existing values in a multi-key INI
-    file be replaced with this entry. This option has
-    no effect if not using multi-key files. The
-    difference between Delete/SetLongValue and
-    SetLongValue with a_bForceReplace = true, is that
-    the load order and comment will be preserved this
-    way.
+        @param a_pSection   Section to add or update
+        @param a_pKey       Key to add or update. 
+        @param a_nValue     Value to set. 
+        @param a_pComment   Comment to be associated with the key. See the 
+                            notes on SetValue() for comments.
+        @param a_bUseHex    By default the value will be written to the file 
+                            in decimal format. Set this to true to write it 
+                            as hexadecimal.
+        @param a_bForceReplace  Should all existing values in a multi-key INI
+                            file be replaced with this entry. This option has
+                            no effect if not using multi-key files. The 
+                            difference between Delete/SetLongValue and 
+                            SetLongValue with a_bForceReplace = true, is that 
+                            the load order and comment will be preserved this 
+                            way.
 
-    @return SI_Error    See error definitions
-    @return SI_UPDATED  Value was updated
-    @return SI_INSERTED Value was inserted
-    */
+        @return SI_Error    See error definitions
+        @return SI_UPDATED  Value was updated
+        @return SI_INSERTED Value was inserted
+     */
     SI_Error SetLongValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         long            a_nValue,
-        const SI_CHAR * a_pComment = NULL,
-        bool            a_bUseHex = false,
+        const SI_CHAR * a_pComment      = NULL,
+        bool            a_bUseHex       = false,
         bool            a_bForceReplace = false
         );
 
     /** Add or update a double value. This will always insert
-    when multiple keys are enabled.
+        when multiple keys are enabled.
 
-    @param a_pSection   Section to add or update
-    @param a_pKey       Key to add or update.
-    @param a_nValue     Value to set.
-    @param a_pComment   Comment to be associated with the key. See the
-    notes on SetValue() for comments.
-    @param a_bForceReplace  Should all existing values in a multi-key INI
-    file be replaced with this entry. This option has
-    no effect if not using multi-key files. The
-    difference between Delete/SetDoubleValue and
-    SetDoubleValue with a_bForceReplace = true, is that
-    the load order and comment will be preserved this
-    way.
+        @param a_pSection   Section to add or update
+        @param a_pKey       Key to add or update. 
+        @param a_nValue     Value to set. 
+        @param a_pComment   Comment to be associated with the key. See the 
+                            notes on SetValue() for comments.
+        @param a_bForceReplace  Should all existing values in a multi-key INI
+                            file be replaced with this entry. This option has
+                            no effect if not using multi-key files. The 
+                            difference between Delete/SetDoubleValue and 
+                            SetDoubleValue with a_bForceReplace = true, is that 
+                            the load order and comment will be preserved this 
+                            way.
 
-    @return SI_Error    See error definitions
-    @return SI_UPDATED  Value was updated
-    @return SI_INSERTED Value was inserted
-    */
+        @return SI_Error    See error definitions
+        @return SI_UPDATED  Value was updated
+        @return SI_INSERTED Value was inserted
+     */
     SI_Error SetDoubleValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         double          a_nValue,
-        const SI_CHAR * a_pComment = NULL,
+        const SI_CHAR * a_pComment      = NULL,
         bool            a_bForceReplace = false
         );
 
     /** Add or update a boolean value. This will always insert
-    when multiple keys are enabled.
+        when multiple keys are enabled.
 
-    @param a_pSection   Section to add or update
-    @param a_pKey       Key to add or update.
-    @param a_bValue     Value to set.
-    @param a_pComment   Comment to be associated with the key. See the
-    notes on SetValue() for comments.
-    @param a_bForceReplace  Should all existing values in a multi-key INI
-    file be replaced with this entry. This option has
-    no effect if not using multi-key files. The
-    difference between Delete/SetBoolValue and
-    SetBoolValue with a_bForceReplace = true, is that
-    the load order and comment will be preserved this
-    way.
+        @param a_pSection   Section to add or update
+        @param a_pKey       Key to add or update. 
+        @param a_bValue     Value to set. 
+        @param a_pComment   Comment to be associated with the key. See the 
+                            notes on SetValue() for comments.
+        @param a_bForceReplace  Should all existing values in a multi-key INI
+                            file be replaced with this entry. This option has
+                            no effect if not using multi-key files. The 
+                            difference between Delete/SetBoolValue and 
+                            SetBoolValue with a_bForceReplace = true, is that 
+                            the load order and comment will be preserved this 
+                            way.
 
-    @return SI_Error    See error definitions
-    @return SI_UPDATED  Value was updated
-    @return SI_INSERTED Value was inserted
-    */
+        @return SI_Error    See error definitions
+        @return SI_UPDATED  Value was updated
+        @return SI_INSERTED Value was inserted
+     */
     SI_Error SetBoolValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
         bool            a_bValue,
-        const SI_CHAR * a_pComment = NULL,
+        const SI_CHAR * a_pComment      = NULL,
         bool            a_bForceReplace = false
         );
 
     /** Delete an entire section, or a key from a section. Note that the
-    data returned by GetSection is invalid and must not be used after
-    anything has been deleted from that section using this method.
-    Note when multiple keys is enabled, this will delete all keys with
-    that name; to selectively delete individual key/values, use
-    DeleteValue.
+        data returned by GetSection is invalid and must not be used after
+        anything has been deleted from that section using this method.
+        Note when multiple keys is enabled, this will delete all keys with
+        that name; to selectively delete individual key/values, use
+        DeleteValue.
 
-    @param a_pSection       Section to delete key from, or if
-    a_pKey is NULL, the section to remove.
-    @param a_pKey           Key to remove from the section. Set to
-    NULL to remove the entire section.
-    @param a_bRemoveEmpty   If the section is empty after this key has
-    been deleted, should the empty section be
-    removed?
+        @param a_pSection       Section to delete key from, or if
+                                a_pKey is NULL, the section to remove.
+        @param a_pKey           Key to remove from the section. Set to
+                                NULL to remove the entire section.
+        @param a_bRemoveEmpty   If the section is empty after this key has
+                                been deleted, should the empty section be
+                                removed?
 
-    @return true            Key or section was deleted.
-    @return false           Key or section was not found.
-    */
+        @return true            Key or section was deleted.
+        @return false           Key or section was not found.
+     */
     bool Delete(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
@@ -1114,25 +1113,25 @@ public:
         );
 
     /** Delete an entire section, or a key from a section. If value is
-    provided, only remove keys with the value. Note that the data
-    returned by GetSection is invalid and must not be used after
-    anything has been deleted from that section using this method.
-    Note when multiple keys is enabled, all keys with the value will
-    be deleted.
+        provided, only remove keys with the value. Note that the data
+        returned by GetSection is invalid and must not be used after
+        anything has been deleted from that section using this method.
+        Note when multiple keys is enabled, all keys with the value will
+        be deleted.
 
-    @param a_pSection       Section to delete key from, or if
-    a_pKey is NULL, the section to remove.
-    @param a_pKey           Key to remove from the section. Set to
-    NULL to remove the entire section.
-    @param a_pValue         Value of key to remove from the section.
-    Set to NULL to remove all keys.
-    @param a_bRemoveEmpty   If the section is empty after this key has
-    been deleted, should the empty section be
-    removed?
+        @param a_pSection       Section to delete key from, or if
+                                a_pKey is NULL, the section to remove.
+        @param a_pKey           Key to remove from the section. Set to
+                                NULL to remove the entire section.
+        @param a_pValue         Value of key to remove from the section.
+                                Set to NULL to remove all keys.
+        @param a_bRemoveEmpty   If the section is empty after this key has
+                                been deleted, should the empty section be
+                                removed?
 
-    @return true            Key/value or section was deleted.
-    @return false           Key/value or section was not found.
-    */
+        @return true            Key/value or section was deleted.
+        @return false           Key/value or section was not found.
+     */
     bool DeleteValue(
         const SI_CHAR * a_pSection,
         const SI_CHAR * a_pKey,
@@ -1142,13 +1141,13 @@ public:
 
     /*-----------------------------------------------------------------------*/
     /** @}
-    @{ @name Converter */
+        @{ @name Converter */
 
     /** Return a conversion object to convert text to the same encoding
-    as is used by the Save(), SaveFile() and SaveString() functions.
-    Use this to prepare the strings that you wish to append or prepend
-    to the output INI data.
-    */
+        as is used by the Save(), SaveFile() and SaveString() functions.
+        Use this to prepare the strings that you wish to append or prepend
+        to the output INI data.
+     */
     Converter GetConverter() const {
         return Converter(m_eStoreFormat);
     }
@@ -1169,8 +1168,8 @@ private:
         );
 
     /** Parse the data looking for the next valid entry. The memory pointed to
-    by a_pData is modified by inserting NULL characters. The pointer is
-    updated to the current location in the block of text.
+        by a_pData is modified by inserting NULL characters. The pointer is
+        updated to the current location in the block of text.
     */
     bool FindEntry(
         SI_CHAR *&  a_pData,
@@ -1182,25 +1181,25 @@ private:
 
     /** Add the section/key/value to our data.
 
-    @param a_pSection   Section name. Sections will be created if they
-    don't already exist.
-    @param a_pKey       Key name. May be NULL to create an empty section.
-    Existing entries will be updated. New entries will
-    be created.
-    @param a_pValue     Value for the key.
-    @param a_pComment   Comment to be associated with the section or the
-    key. If a_pKey is NULL then it will be associated
-    with the section, otherwise the key. This must be
-    a string in full comment form already (have a
-    comment character starting every line).
-    @param a_bForceReplace  Should all existing values in a multi-key INI
-    file be replaced with this entry. This option has
-    no effect if not using multi-key files. The
-    difference between Delete/AddEntry and AddEntry
-    with a_bForceReplace = true, is that the load
-    order and comment will be preserved this way.
-    @param a_bCopyStrings   Should copies of the strings be made or not.
-    If false then the pointers will be used as is.
+        @param a_pSection   Section name. Sections will be created if they
+                            don't already exist.
+        @param a_pKey       Key name. May be NULL to create an empty section.
+                            Existing entries will be updated. New entries will
+                            be created.
+        @param a_pValue     Value for the key.
+        @param a_pComment   Comment to be associated with the section or the
+                            key. If a_pKey is NULL then it will be associated
+                            with the section, otherwise the key. This must be
+                            a string in full comment form already (have a
+                            comment character starting every line).
+        @param a_bForceReplace  Should all existing values in a multi-key INI
+                            file be replaced with this entry. This option has
+                            no effect if not using multi-key files. The 
+                            difference between Delete/AddEntry and AddEntry
+                            with a_bForceReplace = true, is that the load 
+                            order and comment will be preserved this way.
+        @param a_bCopyStrings   Should copies of the strings be made or not.
+                            If false then the pointers will be used as is.
     */
     SI_Error AddEntry(
         const SI_CHAR * a_pSection,
@@ -1224,7 +1223,7 @@ private:
 
     /** Skip over a newline character (or characters) for either DOS or UNIX */
     inline void SkipNewLine(SI_CHAR *& a_pData) const {
-        a_pData += (*a_pData == '\r' && *(a_pData + 1) == '\n') ? 2 : 1;
+        a_pData += (*a_pData == '\r' && *(a_pData+1) == '\n') ? 2 : 1;
     }
 
     /** Make a copy of the supplied string, replacing the original pointer */
@@ -1257,16 +1256,16 @@ private:
 
 private:
     /** Copy of the INI file data in our character format. This will be
-    modified when parsed to have NULL characters added after all
-    interesting string entries. All of the string pointers to sections,
-    keys and values point into this block of memory.
-    */
+        modified when parsed to have NULL characters added after all
+        interesting string entries. All of the string pointers to sections,
+        keys and values point into this block of memory.
+     */
     SI_CHAR * m_pData;
 
     /** Length of the data that we have stored. Used when deleting strings
-    to determine if the string is stored here or in the allocated string
-    buffer.
-    */
+        to determine if the string is stored here or in the allocated string
+        buffer.
+     */
     size_t m_uDataLen;
 
     /** File comment for this data, if one exists. */
@@ -1276,15 +1275,17 @@ private:
     TSection m_data;
 
     /** This vector stores allocated memory for copies of strings that have
-    been supplied after the file load. It will be empty unless SetValue()
-    has been called.
-    */
+        been supplied after the file load. It will be empty unless SetValue()
+        has been called.
+     */
     TNamesDepend m_strings;
 
     /** Is the format of our datafile UTF-8 or MBCS? */
-    Encode m_eStoreFormat;
 
     Encode m_eDefaultFormat;
+
+    /** the file stored format */
+    Encode m_eStoreFormat;
 
     /** Are multiple values permitted for the same key? */
     bool m_bAllowMultiKey;
@@ -1296,8 +1297,8 @@ private:
     bool m_bSpaces;
 
     /** Next order value, used to ensure sections and keys are output in the
-    same order that they are loaded/added.
-    */
+        same order that they are loaded/added.
+     */
     int m_nOrder;
 };
 
@@ -1306,7 +1307,7 @@ private:
 // ---------------------------------------------------------------------------
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::CSimpleIniTempl(
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::CSimpleIniTempl(
     Encode a_eFormat,
     bool a_bAllowMultiKey,
     bool a_bAllowMultiLine
@@ -1323,14 +1324,14 @@ CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::CSimpleIniTempl(
 { }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::~CSimpleIniTempl()
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::~CSimpleIniTempl()
 {
     Reset();
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 void
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::Reset()
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Reset()
 {
     // remove all data
     delete[] m_pData;
@@ -1353,9 +1354,9 @@ CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::Reset()
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadFile(
-const char * a_pszFile
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(
+    const char * a_pszFile
+    )
 {
     FILE * fp = NULL;
 #if __STDC_WANT_SECURE_LIB__ && !_WIN32_WCE
@@ -1374,9 +1375,9 @@ const char * a_pszFile
 #ifdef SI_HAS_WIDE_FILE
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadFile(
-const SI_WCHAR_T * a_pwszFile
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(
+    const SI_WCHAR_T * a_pwszFile
+    )
 {
 #ifdef _WIN32
     FILE * fp = NULL;
@@ -1399,9 +1400,9 @@ const SI_WCHAR_T * a_pwszFile
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadFile(
-FILE * a_fpFile
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadFile(
+    FILE * a_fpFile
+    )
 {
     // load the raw file data
     int retval = fseek(a_fpFile, 0, SEEK_END);
@@ -1415,18 +1416,18 @@ FILE * a_fpFile
     if (lSize == 0) {
         return SI_OK;
     }
-
+    
     // allocate and ensure NULL terminated
-    char * pData = new(std::nothrow) char[lSize + 1];
+    char * pData = new(std::nothrow) char[lSize+1];
     if (!pData) {
         return SI_NOMEM;
     }
     pData[lSize] = 0;
-
+    
     // load data into buffer
     fseek(a_fpFile, 0, SEEK_SET);
     size_t uRead = fread(pData, sizeof(char), lSize, a_fpFile);
-    if (uRead != (size_t)lSize) {
+    if (uRead != (size_t) lSize) {
         delete[] pData;
         return SI_FILE;
     }
@@ -1439,10 +1440,10 @@ FILE * a_fpFile
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadData(
-const wchar_t * a_pData,
-size_t          a_uDataLen
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(
+    const wchar_t * a_pData,
+    size_t          a_uDataLen
+    )
 {
     if (a_uDataLen >=2)
     {
@@ -1458,9 +1459,9 @@ size_t          a_uDataLen
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
 CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadData(
-const char *    a_pData,
-size_t          a_uDataLen
-)
+    const char *    a_pData,
+    size_t          a_uDataLen
+    )
 {
     // simple detect unicode or utf8 or MBCS
     if (a_uDataLen >= 3)
@@ -1485,10 +1486,10 @@ size_t          a_uDataLen
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
 CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadData(
-const char *    a_pData,
-size_t          a_uDataLen,
-Encode          a_eFormat
-)
+    const char *    a_pData,
+    size_t          a_uDataLen,
+    Encode          a_eFormat
+    )
 {
     SI_CONVERTER converter(a_eFormat);
 
@@ -1504,11 +1505,11 @@ Encode          a_eFormat
 
     // allocate memory for the data, ensure that there is a NULL
     // terminator wherever the converted data ends
-    SI_CHAR * pData = new(std::nothrow) SI_CHAR[uLen + 1];
+    SI_CHAR * pData = new(std::nothrow) SI_CHAR[uLen+1];
     if (!pData) {
         return SI_NOMEM;
     }
-    memset(pData, 0, sizeof(SI_CHAR)*(uLen + 1));
+    memset(pData, 0, sizeof(SI_CHAR)*(uLen+1));
 
     // convert the data
     if (!converter.ConvertFromStore(a_pData, a_uDataLen, pData, uLen)) {
@@ -1545,7 +1546,7 @@ Encode          a_eFormat
     }
     else {
         m_pData = pData;
-        m_uDataLen = uLen + 1;
+        m_uDataLen = uLen+1;
     }
 
     return SI_OK;
@@ -1554,26 +1555,27 @@ Encode          a_eFormat
 #ifdef SI_SUPPORT_IOSTREAMS
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadData(
-std::istream & a_istream
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadData(
+    std::istream & a_istream
+    )
 {
     std::string strData;
     char szBuf[512];
     do {
         a_istream.get(szBuf, sizeof(szBuf), '\0');
         strData.append(szBuf);
-    } while (a_istream.good());
+    }
+    while (a_istream.good());
     return LoadData(strData);
 }
 #endif // SI_SUPPORT_IOSTREAMS
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::FindFileComment(
-SI_CHAR *&      a_pData,
-bool            a_bCopyStrings
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindFileComment(
+    SI_CHAR *&      a_pData,
+    bool            a_bCopyStrings
+    )
 {
     // there can only be a single file comment
     if (m_pFileComment) {
@@ -1597,13 +1599,13 @@ bool            a_bCopyStrings
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::FindEntry(
-SI_CHAR *&        a_pData,
-const SI_CHAR *&  a_pSection,
-const SI_CHAR *&  a_pKey,
-const SI_CHAR *&  a_pVal,
-const SI_CHAR *&  a_pComment
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::FindEntry(
+    SI_CHAR *&        a_pData,
+    const SI_CHAR *&  a_pSection,
+    const SI_CHAR *&  a_pKey,
+    const SI_CHAR *&  a_pVal,
+    const SI_CHAR *&  a_pComment
+    ) const
 {
     a_pComment = NULL;
 
@@ -1730,9 +1732,9 @@ const SI_CHAR *&  a_pComment
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::IsMultiLineTag(
-const SI_CHAR * a_pVal
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineTag(
+    const SI_CHAR * a_pVal
+    ) const
 {
     // check for the "<<<" prefix for a multi-line entry
     if (*a_pVal++ != '<') return false;
@@ -1743,9 +1745,9 @@ const SI_CHAR * a_pVal
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::IsMultiLineData(
-const SI_CHAR * a_pData
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsMultiLineData(
+    const SI_CHAR * a_pData
+    ) const
 {
     // data is multi-line if it has any of the following features:
     //  * whitespace prefix
@@ -1780,21 +1782,21 @@ const SI_CHAR * a_pData
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::IsNewLineChar(
-SI_CHAR a_c
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::IsNewLineChar(
+    SI_CHAR a_c
+    ) const
 {
     return (a_c == '\n' || a_c == '\r');
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::LoadMultiLineText(
-SI_CHAR *&          a_pData,
-const SI_CHAR *&    a_pVal,
-const SI_CHAR *     a_pTagName,
-bool                a_bAllowBlankLinesInComment
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::LoadMultiLineText(
+    SI_CHAR *&          a_pData,
+    const SI_CHAR *&    a_pVal,
+    const SI_CHAR *     a_pTagName,
+    bool                a_bAllowBlankLinesInComment
+    ) const
 {
     // we modify this data to strip all newlines down to a single '\n'
     // character. This means that on Windows we need to strip out some
@@ -1814,7 +1816,7 @@ bool                a_bAllowBlankLinesInComment
     // followed by a newline. No whitespace removal is done while
     // searching for this tag.
     SI_CHAR cEndOfLineChar = *a_pData;
-    for (;;) {
+    for(;;) {
         // if we are loading comments then we need a comment character as
         // the first character on every line
         if (!a_pTagName && !IsComment(*a_pData)) {
@@ -1856,7 +1858,7 @@ bool                a_bAllowBlankLinesInComment
 
         // move this line down to the location that it should be if necessary
         if (pDataLine < pCurrLine) {
-            size_t nLen = (size_t)(a_pData - pCurrLine);
+            size_t nLen = (size_t) (a_pData - pCurrLine);
             memmove(pDataLine, pCurrLine, nLen * sizeof(SI_CHAR));
             pDataLine[nLen] = '\0';
         }
@@ -1931,8 +1933,8 @@ int tstrcmp(const wchar_t* l,const wchar_t* r)
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
 CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::CopyString(
-const SI_CHAR *& a_pString
-)
+    const SI_CHAR *& a_pString
+    )
 {
     size_t uLen = 0;
     uLen = tstrlen(a_pString);
@@ -1949,14 +1951,14 @@ const SI_CHAR *& a_pString
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::AddEntry(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-const SI_CHAR * a_pValue,
-const SI_CHAR * a_pComment,
-bool            a_bForceReplace,
-bool            a_bCopyStrings
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::AddEntry(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    const SI_CHAR * a_pValue,
+    const SI_CHAR * a_pComment,
+    bool            a_bForceReplace,
+    bool            a_bCopyStrings
+    )
 {
     SI_Error rc;
     bool bInserted = false;
@@ -1988,7 +1990,7 @@ bool            a_bCopyStrings
 
         typename TSection::value_type oEntry(oSection, TKeyVal());
         typedef typename TSection::iterator SectionIterator;
-        std::pair<SectionIterator, bool> i = m_data.insert(oEntry);
+        std::pair<SectionIterator,bool> i = m_data.insert(oEntry);
         iSection = i.first;
         bInserted = true;
     }
@@ -2009,7 +2011,7 @@ bool            a_bCopyStrings
         while (iKey != keyval.end() && !IsLess(a_pKey, iKey->first.pItem)) {
             if (iKey->first.nOrder < nLoadOrder) {
                 nLoadOrder = iKey->first.nOrder;
-                pComment = iKey->first.pComment;
+                pComment   = iKey->first.pComment;
             }
             ++iKey;
         }
@@ -2060,12 +2062,12 @@ bool            a_bCopyStrings
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 const SI_CHAR *
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-const SI_CHAR * a_pDefault,
-bool *          a_pHasMultiple
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    const SI_CHAR * a_pDefault,
+    bool *          a_pHasMultiple
+    ) const
 {
     if (a_pHasMultiple) {
         *a_pHasMultiple = false;
@@ -2105,13 +2107,13 @@ long tstrtol(const char * str, char ** endptr, int radix)
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetLongValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-long*           a_pRet,
-long            a_nDefault,
-bool *          a_pHasMultiple
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetLongValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    long*           a_pRet,
+    long            a_nDefault,
+    bool *          a_pHasMultiple
+    ) const
 {
     // return the default if we don't have a value
     const SI_CHAR * pszValue = GetValue(a_pSection, a_pKey, NULL, a_pHasMultiple);
@@ -2167,15 +2169,15 @@ int titoa(char*buf,size_t, long value, bool useHex)
 #endif // __STDC_WANT_SECURE_LIB__
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
-SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SetLongValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-long            a_nValue,
-const SI_CHAR * a_pComment,
-bool            a_bUseHex,
-bool            a_bForceReplace
-)
+SI_Error 
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetLongValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    long            a_nValue,
+    const SI_CHAR * a_pComment,
+    bool            a_bUseHex,
+    bool            a_bForceReplace
+    )
 {
     // use SetValue to create sections
     if (!a_pSection || !a_pKey) return SI_FAIL;
@@ -2199,12 +2201,12 @@ double tstrtod(const char * str, char ** endptr)
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
 CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetDoubleValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-double*         a_pRet,
-double          a_nDefault,
-bool *          a_pHasMultiple
-) const
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    double*         a_pRet,
+    double          a_nDefault,
+    bool *          a_pHasMultiple
+    ) const
 {
     // return the default if we don't have a value
     const SI_CHAR * pszValue = GetValue(a_pSection, a_pKey, NULL, a_pHasMultiple);
@@ -2248,12 +2250,12 @@ int tdtoa(char*buf,size_t, double value)
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
 CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SetDoubleValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-double          a_nValue,
-const SI_CHAR * a_pComment,
-bool            a_bForceReplace
-)
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    double          a_nValue,
+    const SI_CHAR * a_pComment,
+    bool            a_bForceReplace
+    )
 {
     // use SetValue to create sections
     if (!a_pSection || !a_pKey) return SI_FAIL;
@@ -2268,13 +2270,13 @@ bool            a_bForceReplace
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetBoolValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-bool*           a_pRet,
-bool            a_bDefault,
-bool *          a_pHasMultiple
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetBoolValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    bool*           a_pRet,
+    bool            a_bDefault,
+    bool *          a_pHasMultiple
+    ) const
 {
     // return the default if we don't have a value
     const SI_CHAR * pszValue = GetValue(a_pSection, a_pKey, NULL, a_pHasMultiple);
@@ -2318,14 +2320,14 @@ bool *          a_pHasMultiple
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
-SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SetBoolValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-bool            a_bValue,
-const SI_CHAR * a_pComment,
-bool            a_bForceReplace
-)
+SI_Error 
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SetBoolValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    bool            a_bValue,
+    const SI_CHAR * a_pComment,
+    bool            a_bForceReplace
+    )
 {
     // use SetValue to create sections
     if (!a_pSection || !a_pKey) return SI_FAIL;
@@ -2336,7 +2338,7 @@ bool            a_bForceReplace
     // convert to output text
     SI_CHAR szOutput[64];
     SI_CONVERTER c(m_eStoreFormat);
-    c.ConvertFromStore(pszInput, strlen(pszInput) + 1,
+    c.ConvertFromStore(pszInput, strlen(pszInput) + 1, 
         szOutput, sizeof(szOutput) / sizeof(SI_CHAR));
 
     // actually add it
@@ -2345,11 +2347,11 @@ bool            a_bForceReplace
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetAllValues(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-TNamesDepend &  a_values
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllValues(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    TNamesDepend &  a_values
+    ) const
 {
     a_values.clear();
 
@@ -2380,9 +2382,9 @@ TNamesDepend &  a_values
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 int
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetSectionSize(
-const SI_CHAR * a_pSection
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSectionSize(
+    const SI_CHAR * a_pSection
+    ) const
 {
     if (!a_pSection) {
         return -1;
@@ -2397,7 +2399,7 @@ const SI_CHAR * a_pSection
     // if multi-key isn't permitted then the section size is
     // the number of keys that we have.
     if (!m_bAllowMultiKey || section.empty()) {
-        return (int)section.size();
+        return (int) section.size();
     }
 
     // otherwise we need to count them
@@ -2414,10 +2416,10 @@ const SI_CHAR * a_pSection
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
-const typename CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::TKeyVal *
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetSection(
-const SI_CHAR * a_pSection
-) const
+const typename CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::TKeyVal *
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetSection(
+    const SI_CHAR * a_pSection
+    ) const
 {
     if (a_pSection) {
         typename TSection::const_iterator i = m_data.find(a_pSection);
@@ -2430,23 +2432,23 @@ const SI_CHAR * a_pSection
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 void
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetAllSections(
-TNamesDepend & a_names
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllSections(
+    TNamesDepend & a_names
+    ) const
 {
     a_names.clear();
     typename TSection::const_iterator i = m_data.begin();
-    for (int n = 0; i != m_data.end(); ++i, ++n) {
+    for (int n = 0; i != m_data.end(); ++i, ++n ) {
         a_names.push_back(i->first);
     }
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::GetAllKeys(
-const SI_CHAR * a_pSection,
-TNamesDepend &  a_names
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::GetAllKeys(
+    const SI_CHAR * a_pSection,
+    TNamesDepend &  a_names
+    ) const
 {
     a_names.clear();
 
@@ -2462,7 +2464,7 @@ TNamesDepend &  a_names
     const TKeyVal & section = iSection->second;
     const SI_CHAR * pLastKey = NULL;
     typename TKeyVal::const_iterator iKeyVal = section.begin();
-    for (int n = 0; iKeyVal != section.end(); ++iKeyVal, ++n) {
+    for (int n = 0; iKeyVal != section.end(); ++iKeyVal, ++n ) {
         if (!pLastKey || IsLess(pLastKey, iKeyVal->first.pItem)) {
             a_names.push_back(iKeyVal->first);
             pLastKey = iKeyVal->first.pItem;
@@ -2474,10 +2476,10 @@ TNamesDepend &  a_names
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SaveFile(
-const char *    a_pszFile,
-bool            a_bAddSignature
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(
+    const char *    a_pszFile,
+    bool            a_bAddSignature
+    ) const
 {
     FILE * fp = NULL;
 #if __STDC_WANT_SECURE_LIB__ && !_WIN32_WCE
@@ -2494,10 +2496,10 @@ bool            a_bAddSignature
 #ifdef SI_HAS_WIDE_FILE
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SaveFile(
-const SI_WCHAR_T *  a_pwszFile,
-bool                a_bAddSignature
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(
+    const SI_WCHAR_T *  a_pwszFile,
+    bool                a_bAddSignature
+    ) const
 {
 #ifdef _WIN32
     FILE * fp = NULL;
@@ -2520,10 +2522,10 @@ bool                a_bAddSignature
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::SaveFile(
-FILE *  a_pFile,
-bool    a_bAddSignature
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::SaveFile(
+    FILE *  a_pFile,
+    bool    a_bAddSignature
+    ) const
 {
     FileWriter writer(a_pFile);
     return Save(writer, a_bAddSignature);
@@ -2531,10 +2533,10 @@ bool    a_bAddSignature
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 SI_Error
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::Save(
-OutputWriter &  a_oOutput,
-bool            a_bAddSignature
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Save(
+    OutputWriter &  a_oOutput,
+    bool            a_bAddSignature
+    ) const
 {
     Converter convert(m_eStoreFormat);
 
@@ -2572,7 +2574,7 @@ bool            a_bAddSignature
 
     // iterate through our sections and output the data
     typename TNamesDepend::const_iterator iSection = oSections.begin();
-    for (; iSection != oSections.end(); ++iSection) {
+    for ( ; iSection != oSections.end(); ++iSection ) {
         // write out the comment if there is one
         if (iSection->pComment) {
             if (bNeedNewLine) {
@@ -2613,13 +2615,13 @@ bool            a_bAddSignature
 
         // write all keys and values
         typename TNamesDepend::const_iterator iKey = oKeys.begin();
-        for (; iKey != oKeys.end(); ++iKey) {
+        for ( ; iKey != oKeys.end(); ++iKey) {
             // get all values for this key
             TNamesDepend oValues;
             GetAllValues(iSection->pItem, iKey->pItem, oValues);
 
             typename TNamesDepend::const_iterator iValue = oValues.begin();
-            for (; iValue != oValues.end(); ++iValue) {
+            for ( ; iValue != oValues.end(); ++iValue) {
                 // write out the comment if there is one
                 if (iValue->pComment) {
                     a_oOutput.Write(SI_NEWLINE_A);
@@ -2663,18 +2665,18 @@ bool            a_bAddSignature
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::OutputMultiLineText(
-OutputWriter &  a_oOutput,
-Converter &     a_oConverter,
-const SI_CHAR * a_pText
-) const
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::OutputMultiLineText(
+    OutputWriter &  a_oOutput,
+    Converter &     a_oConverter,
+    const SI_CHAR * a_pText
+    ) const
 {
     const SI_CHAR * pEndOfLine;
     SI_CHAR cEndOfLineChar = *a_pText;
     while (cEndOfLineChar) {
         // find the end of this line
         pEndOfLine = a_pText;
-        for (; *pEndOfLine && *pEndOfLine != '\n'; ++pEndOfLine) /*loop*/;
+        for (; *pEndOfLine && *pEndOfLine != '\n'; ++pEndOfLine) /*loop*/ ;
         cEndOfLineChar = *pEndOfLine;
 
         // temporarily null terminate, convert and output the line
@@ -2692,23 +2694,23 @@ const SI_CHAR * a_pText
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::Delete(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-bool            a_bRemoveEmpty
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::Delete(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    bool            a_bRemoveEmpty
+    )
 {
     return DeleteValue(a_pSection, a_pKey, NULL, a_bRemoveEmpty);
 }
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 bool
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::DeleteValue(
-const SI_CHAR * a_pSection,
-const SI_CHAR * a_pKey,
-const SI_CHAR * a_pValue,
-bool            a_bRemoveEmpty
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::DeleteValue(
+    const SI_CHAR * a_pSection,
+    const SI_CHAR * a_pKey,
+    const SI_CHAR * a_pValue,
+    bool            a_bRemoveEmpty
+    )
 {
     if (!a_pSection) {
         return false;
@@ -2734,18 +2736,19 @@ bool            a_bRemoveEmpty
         do {
             iDelete = iKeyVal++;
 
-            if (a_pValue == NULL ||
-                (isLess(a_pValue, iDelete->second) == false &&
-                isLess(iDelete->second, a_pValue) == false)) {
+            if(a_pValue == NULL ||
+            (isLess(a_pValue, iDelete->second) == false &&
+            isLess(iDelete->second, a_pValue) == false)) {
                 DeleteString(iDelete->first.pItem);
                 DeleteString(iDelete->second);
                 iSection->second.erase(iDelete);
                 bDeleted = true;
             }
-        } while (iKeyVal != iSection->second.end()
+        }
+        while (iKeyVal != iSection->second.end()
             && !IsLess(a_pKey, iKeyVal->first.pItem));
 
-        if (!bDeleted) {
+        if(!bDeleted) {
             return false;
         }
 
@@ -2760,7 +2763,7 @@ bool            a_bRemoveEmpty
         // delete all copied strings from this section. The actual
         // entries will be removed when the section is removed.
         typename TKeyVal::iterator iKeyVal = iSection->second.begin();
-        for (; iKeyVal != iSection->second.end(); ++iKeyVal) {
+        for ( ; iKeyVal != iSection->second.end(); ++iKeyVal) {
             DeleteString(iKeyVal->first.pItem);
             DeleteString(iKeyVal->second);
         }
@@ -2775,16 +2778,16 @@ bool            a_bRemoveEmpty
 
 template<class SI_CHAR, class SI_STRLESS, class SI_CONVERTER>
 void
-CSimpleIniTempl<SI_CHAR, SI_STRLESS, SI_CONVERTER>::DeleteString(
-const SI_CHAR * a_pString
-)
+CSimpleIniTempl<SI_CHAR,SI_STRLESS,SI_CONVERTER>::DeleteString(
+    const SI_CHAR * a_pString
+    )
 {
     // strings may exist either inside the data block, or they will be
     // individually allocated and stored in m_strings. We only physically
     // delete those stored in m_strings.
     if (a_pString < m_pData || a_pString >= m_pData + m_uDataLen) {
         typename TNamesDepend::iterator i = m_strings.begin();
-        for (; i != m_strings.end(); ++i) {
+        for (;i != m_strings.end(); ++i) {
             if (a_pString == i->pItem) {
                 delete[] const_cast<SI_CHAR*>(i->pItem);
                 m_strings.erase(i);
@@ -2817,16 +2820,16 @@ const SI_CHAR * a_pString
 #endif
 
 /**
-* Generic case-sensitive less than comparison. This class returns numerically
-* ordered ASCII case-sensitive text for all possible sizes and types of
-* SI_CHAR.
-*/
+ * Generic case-sensitive less than comparison. This class returns numerically
+ * ordered ASCII case-sensitive text for all possible sizes and types of
+ * SI_CHAR.
+ */
 template<class SI_CHAR>
 struct SI_GenericCase {
     bool operator()(const SI_CHAR * pLeft, const SI_CHAR * pRight) const {
         long cmp;
-        for (; *pLeft && *pRight; ++pLeft, ++pRight) {
-            cmp = (long)*pLeft - (long)*pRight;
+        for ( ;*pLeft && *pRight; ++pLeft, ++pRight) {
+            cmp = (long) *pLeft - (long) *pRight;
             if (cmp != 0) {
                 return cmp < 0;
             }
@@ -2836,11 +2839,11 @@ struct SI_GenericCase {
 };
 
 /**
-* Generic ASCII case-insensitive less than comparison. This class returns
-* numerically ordered ASCII case-insensitive text for all possible sizes
-* and types of SI_CHAR. It is not safe for MBCS text comparison where
-* ASCII A-Z characters are used in the encoding of multi-byte characters.
-*/
+ * Generic ASCII case-insensitive less than comparison. This class returns
+ * numerically ordered ASCII case-insensitive text for all possible sizes
+ * and types of SI_CHAR. It is not safe for MBCS text comparison where
+ * ASCII A-Z characters are used in the encoding of multi-byte characters.
+ */
 template<class SI_CHAR>
 struct SI_GenericNoCase {
     inline SI_CHAR locase(SI_CHAR ch) const {
@@ -2848,8 +2851,8 @@ struct SI_GenericNoCase {
     }
     bool operator()(const SI_CHAR * pLeft, const SI_CHAR * pRight) const {
         long cmp;
-        for (; *pLeft && *pRight; ++pLeft, ++pRight) {
-            cmp = (long)locase(*pLeft) - (long)locase(*pRight);
+        for ( ;*pLeft && *pRight; ++pLeft, ++pRight) {
+            cmp = (long) locase(*pLeft) - (long) locase(*pRight);
             if (cmp != 0) {
                 return cmp < 0;
             }
@@ -2859,8 +2862,8 @@ struct SI_GenericNoCase {
 };
 
 /**
-* Null conversion class for MBCS/UTF-8 to char (or equivalent).
-*/
+ * Null conversion class for MBCS/UTF-8 to char (or equivalent).
+ */
 template<class SI_CHAR>
 class SI_ConvertA {
     Encode m_eStoreFormat;
@@ -2877,42 +2880,42 @@ public:
     }
 
     /** Calculate the number of SI_CHAR required for converting the input
-    * from the storage format. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @return              Number of SI_CHAR required by the string when
-    *                      converted. If there are embedded NULL bytes in the
-    *                      input data, only the string up and not including
-    *                      the NULL byte will be converted.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * from the storage format. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @return              Number of SI_CHAR required by the string when
+     *                      converted. If there are embedded NULL bytes in the
+     *                      input data, only the string up and not including
+     *                      the NULL byte will be converted.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen)
     {
         (void)a_pInputData;
-        SI_ASSERT(a_uInputDataLen != (size_t)-1);
+        SI_ASSERT(a_uInputDataLen != (size_t) -1);
 
         // ASCII/MBCS/UTF-8 needs no conversion
         return a_uInputDataLen;
     }
 
     /** Convert the input string from the storage format to SI_CHAR.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @param a_pOutputData Pointer to the output buffer to received the
-    *                      converted data.
-    * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
-    * @return              true if all of the input data was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @param a_pOutputData Pointer to the output buffer to received the
+     *                      converted data.
+     * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
+     * @return              true if all of the input data was successfully
+     *                      converted.
+     */
     bool ConvertFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen,
@@ -2928,15 +2931,15 @@ public:
     }
 
     /** Calculate the number of char required by the storage format of this
-    * data. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated string to calculate the number of
-    *                      bytes required to be converted to storage format.
-    * @return              Number of bytes required by the string when
-    *                      converted to storage format. This size always
-    *                      includes space for the terminating NULL character.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * data. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated string to calculate the number of
+     *                      bytes required to be converted to storage format.
+     * @return              Number of bytes required by the string when
+     *                      converted to storage format. This size always
+     *                      includes space for the terminating NULL character.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeToStore(
         const SI_CHAR * a_pInputData)
     {
@@ -2945,18 +2948,18 @@ public:
     }
 
     /** Convert the input string to the storage format of this data.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated source string to convert. All of
-    *                      the data will be converted including the
-    *                      terminating NULL character.
-    * @param a_pOutputData Pointer to the buffer to receive the converted
-    *                      string.
-    * @param a_uOutputDataSize Size of the output buffer in char.
-    * @return              true if all of the input data, including the
-    *                      terminating NULL character was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated source string to convert. All of
+     *                      the data will be converted including the
+     *                      terminating NULL character.
+     * @param a_pOutputData Pointer to the buffer to receive the converted
+     *                      string.
+     * @param a_uOutputDataSize Size of the output buffer in char.
+     * @return              true if all of the input data, including the
+     *                      terminating NULL character was successfully
+     *                      converted.
+     */
     bool ConvertToStore(
         const SI_CHAR * a_pInputData,
         char *          a_pOutputData,
@@ -2987,9 +2990,9 @@ public:
 #include "ConvertUTF.h"
 
 /**
-* Converts UTF-8 to a wchar_t (or equivalent) using the Unicode reference
-* library functions. This can be used on all platforms.
-*/
+ * Converts UTF-8 to a wchar_t (or equivalent) using the Unicode reference
+ * library functions. This can be used on all platforms.
+ */
 template<class SI_CHAR>
 class SI_ConvertW {
     Encode m_eStoreFormat;
@@ -3006,23 +3009,23 @@ public:
     }
 
     /** Calculate the number of SI_CHAR required for converting the input
-    * from the storage format. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @return              Number of SI_CHAR required by the string when
-    *                      converted. If there are embedded NULL bytes in the
-    *                      input data, only the string up and not including
-    *                      the NULL byte will be converted.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * from the storage format. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @return              Number of SI_CHAR required by the string when
+     *                      converted. If there are embedded NULL bytes in the
+     *                      input data, only the string up and not including
+     *                      the NULL byte will be converted.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen)
     {
-        SI_ASSERT(a_uInputDataLen != (size_t)-1);
+        SI_ASSERT(a_uInputDataLen != (size_t) -1);
 
         if (m_eStoreFormat == UTF8) {
             // worst case scenario for UTF-8 to wchar_t is 1 char -> 1 wchar_t
@@ -3043,18 +3046,18 @@ public:
     }
 
     /** Convert the input string from the storage format to SI_CHAR.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                       must be the actual length of the data, including
-    *                       NULL byte if NULL terminated string is required.
-    * @param a_pOutputData Pointer to the output buffer to received the
-    *                       converted data.
-    * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
-    * @return              true if all of the input data was successfully
-    *                       converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                       must be the actual length of the data, including
+     *                       NULL byte if NULL terminated string is required.
+     * @param a_pOutputData Pointer to the output buffer to received the
+     *                       converted data.
+     * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
+     * @return              true if all of the input data was successfully
+     *                       converted.
+     */
     bool ConvertFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen,
@@ -3068,16 +3071,16 @@ public:
             // the distribution but are publically available from unicode.org
             // at http://www.unicode.org/Public/PROGRAMS/CVTUTF/
             ConversionResult retval;
-            const UTF8 * pUtf8 = (const UTF8 *)a_pInputData;
+            const UTF8 * pUtf8 = (const UTF8 *) a_pInputData;
             if (sizeof(wchar_t) == sizeof(UTF32)) {
-                UTF32 * pUtf32 = (UTF32 *)a_pOutputData;
+                UTF32 * pUtf32 = (UTF32 *) a_pOutputData;
                 retval = ConvertUTF8toUTF32(
                     &pUtf8, pUtf8 + a_uInputDataLen,
                     &pUtf32, pUtf32 + a_uOutputDataSize,
                     lenientConversion);
             }
             else if (sizeof(wchar_t) == sizeof(UTF16)) {
-                UTF16 * pUtf16 = (UTF16 *)a_pOutputData;
+                UTF16 * pUtf16 = (UTF16 *) a_pOutputData;
                 retval = ConvertUTF8toUTF16(
                     &pUtf8, pUtf8 + a_uInputDataLen,
                     &pUtf16, pUtf16 + a_uOutputDataSize,
@@ -3093,15 +3096,15 @@ public:
     }
 
     /** Calculate the number of char required by the storage format of this
-    * data. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated string to calculate the number of
-    *                       bytes required to be converted to storage format.
-    * @return              Number of bytes required by the string when
-    *                       converted to storage format. This size always
-    *                       includes space for the terminating NULL character.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * data. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated string to calculate the number of
+     *                       bytes required to be converted to storage format.
+     * @return              Number of bytes required by the string when
+     *                       converted to storage format. This size always
+     *                       includes space for the terminating NULL character.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeToStore(
         const SI_CHAR * a_pInputData)
     {
@@ -3123,18 +3126,18 @@ public:
     }
 
     /** Convert the input string to the storage format of this data.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated source string to convert. All of
-    *                       the data will be converted including the
-    *                       terminating NULL character.
-    * @param a_pOutputData Pointer to the buffer to receive the converted
-    *                       string.
-    * @param a_uOutputDataSize Size of the output buffer in char.
-    * @return              true if all of the input data, including the
-    *                       terminating NULL character was successfully
-    *                       converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated source string to convert. All of
+     *                       the data will be converted including the
+     *                       terminating NULL character.
+     * @param a_pOutputData Pointer to the buffer to receive the converted
+     *                       string.
+     * @param a_uOutputDataSize Size of the output buffer in char.
+     * @return              true if all of the input data, including the
+     *                       terminating NULL character was successfully
+     *                       converted.
+     */
     bool ConvertToStore(
         const SI_CHAR * a_pInputData,
         char *          a_pOutputData,
@@ -3155,16 +3158,16 @@ public:
             // the distribution but are publically available from unicode.org
             // at http://www.unicode.org/Public/PROGRAMS/CVTUTF/
             ConversionResult retval;
-            UTF8 * pUtf8 = (UTF8 *)a_pOutputData;
+            UTF8 * pUtf8 = (UTF8 *) a_pOutputData;
             if (sizeof(wchar_t) == sizeof(UTF32)) {
-                const UTF32 * pUtf32 = (const UTF32 *)a_pInputData;
+                const UTF32 * pUtf32 = (const UTF32 *) a_pInputData;
                 retval = ConvertUTF32toUTF8(
                     &pUtf32, pUtf32 + uInputLen,
                     &pUtf8, pUtf8 + a_uOutputDataSize,
                     lenientConversion);
             }
             else if (sizeof(wchar_t) == sizeof(UTF16)) {
-                const UTF16 * pUtf16 = (const UTF16 *)a_pInputData;
+                const UTF16 * pUtf16 = (const UTF16 *) a_pInputData;
                 retval = ConvertUTF16toUTF8(
                     &pUtf16, pUtf16 + uInputLen,
                     &pUtf8, pUtf8 + a_uOutputDataSize,
@@ -3175,7 +3178,7 @@ public:
         else {
             size_t retval = wcstombs(a_pOutputData,
                 a_pInputData, a_uOutputDataSize);
-            return retval != (size_t)-1;
+            return retval != (size_t) -1;
         }
     }
 };
@@ -3194,8 +3197,8 @@ public:
 #include <unicode/ucnv.h>
 
 /**
-* Converts MBCS/UTF-8 to UChar using ICU. This can be used on all platforms.
-*/
+ * Converts MBCS/UTF-8 to UChar using ICU. This can be used on all platforms.
+ */
 template<class SI_CHAR>
 class SI_ConvertW {
     const char * m_pEncoding;
@@ -3217,23 +3220,23 @@ public:
     ~SI_ConvertW() { if (m_pConverter) ucnv_close(m_pConverter); }
 
     /** Calculate the number of UChar required for converting the input
-    * from the storage format. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to UChar.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @return              Number of UChar required by the string when
-    *                      converted. If there are embedded NULL bytes in the
-    *                      input data, only the string up and not including
-    *                      the NULL byte will be converted.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * from the storage format. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to UChar.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @return              Number of UChar required by the string when
+     *                      converted. If there are embedded NULL bytes in the
+     *                      input data, only the string up and not including
+     *                      the NULL byte will be converted.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen)
     {
-        SI_ASSERT(a_uInputDataLen != (size_t)-1);
+        SI_ASSERT(a_uInputDataLen != (size_t) -1);
 
         UErrorCode nError;
 
@@ -3241,33 +3244,33 @@ public:
             nError = U_ZERO_ERROR;
             m_pConverter = ucnv_open(m_pEncoding, &nError);
             if (U_FAILURE(nError)) {
-                return (size_t)-1;
+                return (size_t) -1;
             }
         }
 
         nError = U_ZERO_ERROR;
         int32_t nLen = ucnv_toUChars(m_pConverter, NULL, 0,
-            a_pInputData, (int32_t)a_uInputDataLen, &nError);
+            a_pInputData, (int32_t) a_uInputDataLen, &nError);
         if (U_FAILURE(nError) && nError != U_BUFFER_OVERFLOW_ERROR) {
-            return (size_t)-1;
+            return (size_t) -1;
         }
 
-        return (size_t)nLen;
+        return (size_t) nLen;
     }
 
     /** Convert the input string from the storage format to UChar.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to UChar.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @param a_pOutputData Pointer to the output buffer to received the
-    *                      converted data.
-    * @param a_uOutputDataSize Size of the output buffer in UChar.
-    * @return              true if all of the input data was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to UChar.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @param a_pOutputData Pointer to the output buffer to received the
+     *                      converted data.
+     * @param a_uOutputDataSize Size of the output buffer in UChar.
+     * @return              true if all of the input data was successfully
+     *                      converted.
+     */
     bool ConvertFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen,
@@ -3286,8 +3289,8 @@ public:
 
         nError = U_ZERO_ERROR;
         ucnv_toUChars(m_pConverter,
-            a_pOutputData, (int32_t)a_uOutputDataSize,
-            a_pInputData, (int32_t)a_uInputDataLen, &nError);
+            a_pOutputData, (int32_t) a_uOutputDataSize,
+            a_pInputData, (int32_t) a_uInputDataLen, &nError);
         if (U_FAILURE(nError)) {
             return false;
         }
@@ -3296,15 +3299,15 @@ public:
     }
 
     /** Calculate the number of char required by the storage format of this
-    * data. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated string to calculate the number of
-    *                      bytes required to be converted to storage format.
-    * @return              Number of bytes required by the string when
-    *                      converted to storage format. This size always
-    *                      includes space for the terminating NULL character.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * data. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated string to calculate the number of
+     *                      bytes required to be converted to storage format.
+     * @return              Number of bytes required by the string when
+     *                      converted to storage format. This size always
+     *                      includes space for the terminating NULL character.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeToStore(
         const UChar * a_pInputData)
     {
@@ -3314,7 +3317,7 @@ public:
             nError = U_ZERO_ERROR;
             m_pConverter = ucnv_open(m_pEncoding, &nError);
             if (U_FAILURE(nError)) {
-                return (size_t)-1;
+                return (size_t) -1;
             }
         }
 
@@ -3322,25 +3325,25 @@ public:
         int32_t nLen = ucnv_fromUChars(m_pConverter, NULL, 0,
             a_pInputData, -1, &nError);
         if (U_FAILURE(nError) && nError != U_BUFFER_OVERFLOW_ERROR) {
-            return (size_t)-1;
+            return (size_t) -1;
         }
 
-        return (size_t)nLen + 1;
+        return (size_t) nLen + 1;
     }
 
     /** Convert the input string to the storage format of this data.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated source string to convert. All of
-    *                      the data will be converted including the
-    *                      terminating NULL character.
-    * @param a_pOutputData Pointer to the buffer to receive the converted
-    *                      string.
-    * @param a_pOutputDataSize Size of the output buffer in char.
-    * @return              true if all of the input data, including the
-    *                      terminating NULL character was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated source string to convert. All of
+     *                      the data will be converted including the
+     *                      terminating NULL character.
+     * @param a_pOutputData Pointer to the buffer to receive the converted
+     *                      string.
+     * @param a_pOutputDataSize Size of the output buffer in char.
+     * @return              true if all of the input data, including the
+     *                      terminating NULL character was successfully
+     *                      converted.
+     */
     bool ConvertToStore(
         const UChar *   a_pInputData,
         char *          a_pOutputData,
@@ -3358,7 +3361,7 @@ public:
 
         nError = U_ZERO_ERROR;
         ucnv_fromUChars(m_pConverter,
-            a_pOutputData, (int32_t)a_uOutputDataSize,
+            a_pOutputData, (int32_t) a_uOutputDataSize,
             a_pInputData, -1, &nError);
         if (U_FAILURE(nError)) {
             return false;
@@ -3390,13 +3393,13 @@ public:
 # define SI_NoCase   SI_GenericNoCase
 #else // !SI_NO_MBCS
 /**
-* Case-insensitive comparison class using Win32 MBCS functions. This class
-* returns a case-insensitive semi-collation order for MBCS text. It may not
-* be safe for UTF-8 text returned in char format as we don't know what
-* characters will be folded by the function! Therefore, if you are using
-* SI_CHAR == char and SetUnicode(true), then you need to use the generic
-* SI_NoCase class instead.
-*/
+ * Case-insensitive comparison class using Win32 MBCS functions. This class
+ * returns a case-insensitive semi-collation order for MBCS text. It may not
+ * be safe for UTF-8 text returned in char format as we don't know what
+ * characters will be folded by the function! Therefore, if you are using
+ * SI_CHAR == char and SetUnicode(true), then you need to use the generic
+ * SI_NoCase class instead.
+ */
 #include <mbstring.h>
 template<class SI_CHAR>
 struct SI_NoCase {
@@ -3415,11 +3418,11 @@ struct SI_NoCase {
 #endif // SI_NO_MBCS
 
 /**
-* Converts MBCS and UTF-8 to a wchar_t (or equivalent) on Windows. This uses
-* only the Win32 functions and doesn't require the external Unicode UTF-8
-* conversion library. It will not work on Windows 95 without using Microsoft
-* Layer for Unicode in your application.
-*/
+ * Converts MBCS and UTF-8 to a wchar_t (or equivalent) on Windows. This uses
+ * only the Win32 functions and doesn't require the external Unicode UTF-8
+ * conversion library. It will not work on Windows 95 without using Microsoft
+ * Layer for Unicode in your application.
+ */
 template<class SI_CHAR>
 class SI_ConvertW {
     Encode m_eStoreFormat;
@@ -3436,23 +3439,23 @@ public:
     }
 
     /** Calculate the number of SI_CHAR required for converting the input
-    * from the storage format. The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @return              Number of SI_CHAR required by the string when
-    *                      converted. If there are embedded NULL bytes in the
-    *                      input data, only the string up and not including
-    *                      the NULL byte will be converted.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * from the storage format. The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @return              Number of SI_CHAR required by the string when
+     *                      converted. If there are embedded NULL bytes in the
+     *                      input data, only the string up and not including
+     *                      the NULL byte will be converted.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen)
     {
-        SI_ASSERT(a_uInputDataLen != (size_t)-1);
+        SI_ASSERT(a_uInputDataLen != (size_t) -1);
         if (m_eStoreFormat == UTF16_LITTLE)
         {
             //needs no conversion
@@ -3462,24 +3465,24 @@ public:
         int retval = MultiByteToWideChar(
             m_eStoreFormat == UTF8 ? CP_UTF8 :
             m_eStoreFormat == MBCS ? CP_GBK : CP_ACP, 0,
-            a_pInputData, (int)a_uInputDataLen,
+            a_pInputData, (int) a_uInputDataLen,
             0, 0);
         return (size_t)(retval > 0 ? retval : -1);
     }
 
     /** Convert the input string from the storage format to SI_CHAR.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
-    * @param a_uInputDataLen Length of storage format data in bytes. This
-    *                      must be the actual length of the data, including
-    *                      NULL byte if NULL terminated string is required.
-    * @param a_pOutputData Pointer to the output buffer to received the
-    *                      converted data.
-    * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
-    * @return              true if all of the input data was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  Data in storage format to be converted to SI_CHAR.
+     * @param a_uInputDataLen Length of storage format data in bytes. This
+     *                      must be the actual length of the data, including
+     *                      NULL byte if NULL terminated string is required.
+     * @param a_pOutputData Pointer to the output buffer to received the
+     *                      converted data.
+     * @param a_uOutputDataSize Size of the output buffer in SI_CHAR.
+     * @return              true if all of the input data was successfully
+     *                      converted.
+     */
     bool ConvertFromStore(
         const char *    a_pInputData,
         size_t          a_uInputDataLen,
@@ -3490,25 +3493,25 @@ public:
             memcpy(a_pOutputData, a_pInputData, a_uInputDataLen);
             return true;
         }
-        
+
         int nSize = MultiByteToWideChar(
             m_eStoreFormat == UTF8 ? CP_UTF8 :
             m_eStoreFormat == MBCS ? CP_GBK : CP_ACP, 0,
-            a_pInputData, (int)a_uInputDataLen,
-            (wchar_t *)a_pOutputData, (int)a_uOutputDataSize);
+            a_pInputData, (int) a_uInputDataLen,
+            (wchar_t *) a_pOutputData, (int) a_uOutputDataSize);
         return (nSize > 0);
     }
 
     /** Calculate the number of char required by the storage format of this
-    * data. The storage format is always UTF-8.
-    *
-    * @param a_pInputData  NULL terminated string to calculate the number of
-    *                      bytes required to be converted to storage format.
-    * @return              Number of bytes required by the string when
-    *                      converted to storage format. This size always
-    *                      includes space for the terminating NULL character.
-    * @return              -1 cast to size_t on a conversion error.
-    */
+     * data. The storage format is always UTF-8.
+     *
+     * @param a_pInputData  NULL terminated string to calculate the number of
+     *                      bytes required to be converted to storage format.
+     * @return              Number of bytes required by the string when
+     *                      converted to storage format. This size always
+     *                      includes space for the terminating NULL character.
+     * @return              -1 cast to size_t on a conversion error.
+     */
     size_t SizeToStore(
         const SI_CHAR * a_pInputData)
     {
@@ -3518,24 +3521,24 @@ public:
         int retval = WideCharToMultiByte(
             m_eStoreFormat == UTF8 ? CP_UTF8 :
             m_eStoreFormat == MBCS ? CP_GBK : CP_ACP, 0,
-            (const wchar_t *)a_pInputData, -1,
+            (const wchar_t *) a_pInputData, -1,
             0, 0, 0, 0);
-        return (size_t)(retval > 0 ? retval : -1);
+        return (size_t) (retval > 0 ? retval : -1);
     }
 
     /** Convert the input string to the storage format of this data.
-    * The storage format is always UTF-8 or MBCS.
-    *
-    * @param a_pInputData  NULL terminated source string to convert. All of
-    *                      the data will be converted including the
-    *                      terminating NULL character.
-    * @param a_pOutputData Pointer to the buffer to receive the converted
-    *                      string.
-    * @param a_pOutputDataSize Size of the output buffer in char.
-    * @return              true if all of the input data, including the
-    *                      terminating NULL character was successfully
-    *                      converted.
-    */
+     * The storage format is always UTF-8 or MBCS.
+     *
+     * @param a_pInputData  NULL terminated source string to convert. All of
+     *                      the data will be converted including the
+     *                      terminating NULL character.
+     * @param a_pOutputData Pointer to the buffer to receive the converted
+     *                      string.
+     * @param a_pOutputDataSize Size of the output buffer in char.
+     * @return              true if all of the input data, including the
+     *                      terminating NULL character was successfully
+     *                      converted.
+     */
     bool ConvertToStore(
         const SI_CHAR * a_pInputData,
         char *          a_pOutputData,
@@ -3554,8 +3557,8 @@ public:
         int retval = WideCharToMultiByte(
             m_eStoreFormat == UTF8 ? CP_UTF8 :
             m_eStoreFormat == MBCS ? CP_GBK : CP_ACP, 0,
-            (const wchar_t *)a_pInputData, -1,
-            a_pOutputData, (int)a_uOutputDataSize, 0, 0);
+            (const wchar_t *) a_pInputData, -1,
+            a_pOutputData, (int) a_uOutputDataSize, 0, 0);
         return retval > 0;
     }
 };
@@ -3568,20 +3571,20 @@ public:
 // ---------------------------------------------------------------------------
 
 typedef CSimpleIniTempl<char,
-    SI_NoCase<char>, SI_ConvertA<char> >                 CSimpleIniA;
+    SI_NoCase<char>,SI_ConvertA<char> >                 CSimpleIniA;
 typedef CSimpleIniTempl<char,
-    SI_Case<char>, SI_ConvertA<char> >                   CSimpleIniCaseA;
+    SI_Case<char>,SI_ConvertA<char> >                   CSimpleIniCaseA;
 
 #if defined(SI_CONVERT_ICU)
 typedef CSimpleIniTempl<UChar,
-    SI_NoCase<UChar>, SI_ConvertW<UChar> >               CSimpleIniW;
+    SI_NoCase<UChar>,SI_ConvertW<UChar> >               CSimpleIniW;
 typedef CSimpleIniTempl<UChar,
-    SI_Case<UChar>, SI_ConvertW<UChar> >                 CSimpleIniCaseW;
+    SI_Case<UChar>,SI_ConvertW<UChar> >                 CSimpleIniCaseW;
 #else
 typedef CSimpleIniTempl<wchar_t,
-    SI_NoCase<wchar_t>, SI_ConvertW<wchar_t> >           CSimpleIniW;
+    SI_NoCase<wchar_t>,SI_ConvertW<wchar_t> >           CSimpleIniW;
 typedef CSimpleIniTempl<wchar_t,
-    SI_Case<wchar_t>, SI_ConvertW<wchar_t> >             CSimpleIniCaseW;
+    SI_Case<wchar_t>,SI_ConvertW<wchar_t> >             CSimpleIniCaseW;
 #endif
 
 #ifdef _UNICODE
